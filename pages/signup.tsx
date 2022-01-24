@@ -1,4 +1,4 @@
-import { Field, Form, Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
@@ -62,7 +62,7 @@ const StyledTextLink = styled.a`
   }
 `
 
-const Login = () => {
+const Signup = () => {
 
   const [login] = useLoginMutation()
 
@@ -70,7 +70,7 @@ const Login = () => {
     <Container>
       <div>
         <LightHeading>
-          Login
+          Sign Up
         </LightHeading>
         <Formik
           initialValues={{
@@ -100,15 +100,15 @@ const Login = () => {
               {errors.email}
               <FormField name="password" type="password" label="password"/>
               {errors.password}
-              <FormButton type='submit'>Log In</FormButton>
+              <FormButton type='submit'>Sign Up</FormButton>
             </Form>
           )}
         </Formik>
         <LightMinorText>
-          New to Reddit? {' '}
-          <Link href="/signup">
+          Already a redditor? {' '}
+          <Link href="/login">
             <StyledTextLink >
-              SIGN UP          
+              LOG IN     
             </StyledTextLink>
           </Link>
         </LightMinorText>
@@ -117,4 +117,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Signup
