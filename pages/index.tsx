@@ -1,55 +1,42 @@
-import { Field, Form, Formik } from 'formik'
 import React from 'react'
 import styled from 'styled-components'
-import { useLoginMutation } from '../generated/graphql'
-import mapToFormikErrors from '../utils/mapToFormikErrors'
-import { setToken } from '../utils/token'
+import NavBar from '../components/NavBar'
+import Post from '../components/Post'
+import { useLoginMutation, usePaginatedPostsQuery } from '../generated/graphql'
 
 const Container = styled.div`
-  display: grid;
-  place-items: center;
-  height: 100%;
+  max-width: 600px;
+  margin: 0rem auto;
+  padding-top: 70px;
 `
 const Home = () => {
 
-  const [login] = useLoginMutation()
+  const {data, loading, error} = usePaginatedPostsQuery()
 
+  if(loading) {
+    return(
+      <Container>
+        Loading...
+      </Container>
+    )
+  }
+
+  console.log(data?.paginatedPosts.posts)
   return(
-    <Container>
-      <Formik
-        initialValues={{
-          email: '',
-          password: ''
-        }}
-        onSubmit={async ({email, password}, {setErrors}) => {
-          console.log({email, password})
-          try{
-            const response = await login({ variables: {email,password}})
-            if(response.data){
-              if(response.data.login.errors){
-                console.log('errors: ',response.data.login.errors)
-                setErrors(mapToFormikErrors(response.data.login.errors))
-              } else {
-                console.log('token: ', response.data.login.token)
-              }
-            }
-          } catch(err) {
-            console.log(err)
+    <>
+      <NavBar/>
+      <Container>
+        <main>
+          {
+            data?.paginatedPosts.posts.map(post => {
+              return(
+                <Post key={post.id} post={post}/>
+              )
+            })
           }
-          
-        }}
-      >
-        {({errors}) => (
-          <Form>
-            <Field name="email" type="email"/>
-            {errors.email}
-            <Field name="password" type="password"/>
-            {errors.password}
-            <button type='submit'>login</button>
-          </Form>
-        )}
-      </Formik>
-    </Container>
+        </main>
+      </Container>
+    </>
   )
 }
 

@@ -10,10 +10,13 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     height: 100%;
     width: 100%;
+    background:#dae0e6;
+    font-family: Roboto, sans-serif;
   }
   html{
     height: 100%;
     width: 100%;
+    font-size: 14px;
   }
   #__next{
     height: 100%;
@@ -26,16 +29,15 @@ const theme = {
   },
 }
 
-export default function App({ Component, pageProps }) {
+const App = ({ Component, pageProps }) => {
   return (
-    <>
-      <ApolloProvider client={client}>
-        <GlobalStyle />
-        <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </ApolloProvider>
-
-    </>
+    <ApolloProvider client={client}>
+      <GlobalStyle />
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </ApolloProvider>
   )
 }
+
+export default App

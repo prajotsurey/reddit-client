@@ -1,0 +1,14 @@
+query paginatedPosts($cursor: String){
+  paginatedPosts(cursor: $cursor){
+		posts{
+      id
+      title
+      content
+
+      creator{
+        id
+        email
+      }
+    }
+  }
+}
