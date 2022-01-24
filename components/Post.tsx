@@ -3,22 +3,22 @@ import React from 'react'
 import styled from 'styled-components'
 
 const PostContainer = styled.div`
-  border: 1px solid rgb(204, 204, 204);
+  border: 1px solid ${props => props.theme.primaryBorder};
   margin-bottom: 1em;
   width:100%;
   box-sizing: border-box;
   border-radius: 8px;
-  background: #fff;
+  background: ${props => props.theme.primaryBackground};
   display:flex;
   flex-direction:row;
   min-height: 100px;
   &:hover {
-    border-color: black;
+    border-color: ${props => props.theme.primaryBorderHover};
   }
 `
 const VoteSection = styled.div`
   width: 40px;
-  background: #f7f9fa;
+  background: ${props => props.theme.voteSectionBackground};
   border-radius: 8px 0px 0px 8px;
 `
 const PostData = styled.div`
@@ -27,7 +27,7 @@ const PostData = styled.div`
 `
 const PostCreator = styled.div`
   font-size: 0.6rem;
-  color:rgb(120, 124, 126);
+  color:${props => props.theme.dimColor};
   margin-bottom: 8px;
 `
 

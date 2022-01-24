@@ -10,12 +10,12 @@ const Container = styled.div`
   padding-top: 70px;
 `
 const PostContainer = styled.div`
-  border: 1px solid rgb(204, 204, 204);
+  border: 1px solid ${props => props.theme.primaryBorder};
   margin-bottom: 1em;
   width:100%;
   box-sizing: border-box;
   border-radius: 8px;
-  background: #fff;
+  background: ${props => props.theme.primaryBackground};
   display:flex;
   flex-direction:row;
   min-height: 100px;
@@ -30,7 +30,7 @@ const PostData = styled.div`
 `
 const PostCreator = styled.div`
   font-size: 0.8rem;
-  color:rgb(120, 124, 126);
+  color:${props => props.theme.dimColor};
   margin-bottom: 10px;
 `
 

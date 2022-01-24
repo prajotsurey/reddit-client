@@ -1,5 +1,6 @@
 import { Field, Form, Formik } from 'formik'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 import FormField from '../components/FormField'
@@ -15,25 +16,25 @@ const Container = styled.div`
 
 const FormButton = styled.button`
 text-decoration: none;
-border: 1px solid #0079d3;
+border: 1px solid ${props => props.theme.secondaryAccentBackground};
 border-radius: 7px;
 padding: 8px 40px;
-color: #fff;
+color: ${props => props.theme.secondaryAccentTextColor};
 font-weight: 600;
 margin-top: 10px;
 width: 100%;
-background: #0079d3;
+background: ${props => props.theme.secondaryAccentBackground};
 
 &:hover {
-  background:#1483d6;
+  background: ${props => props.theme.secondaryAccentBackgroundHover};
 }
 
 &:focus {
-  background:#298eda;
+  background: ${props => props.theme.secondaryAccentBackgroundFocus};
 }
 
 &:active {
-  background: #3d99dd;
+  background: ${props => props.theme.secondaryAccentBackgroundActive};
 }
 `
 const LightHeading = styled.h1`
@@ -47,24 +48,21 @@ const LightMinorText = styled.div`
   margin-top: 10px;
 `
 const StyledTextLink = styled.a`
-  color: rgb(0, 121, 211);
+  color: ${props => props.theme.primaryAccentTextColor};
   font-weight: 600;
   &:hover {
-    color: #3394dc;
+    color: ${props => props.theme.primaryAccentTextColorHover};
   }
 
   &:active {
-    color: #0061a9;
+    color: ${props => props.theme.primaryAccentTextColorActive};
   }
 
-  &:focus {
-    color:
-  }
 `
 
 const Login = () => {
-
   const [login] = useLoginMutation()
+  const router = useRouter()
 
   return(
     <Container>
@@ -83,7 +81,7 @@ const Login = () => {
               if(response.data){
                 if(response.data.login.token){
                   setToken(response.data.login.token)
-                  console.log(getToken())
+                  router.push('/')
                 } else {
                   setErrors(mapToFormikErrors(response.data.login.errors!))
                 }

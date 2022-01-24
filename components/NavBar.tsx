@@ -1,6 +1,8 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
+import { useMeQuery } from '../generated/graphql'
+import { ThemeContext } from '../pages/_app'
 
 const NavBarContainer = styled.nav`
   position: fixed;
@@ -8,7 +10,7 @@ const NavBarContainer = styled.nav`
   left:0;
   right:0;
   height: 50px;
-  background: white;
+  background: ${props => props.theme.primaryBackground};
   display:flex;
   flex-direction:row;
   align-items:center;
@@ -27,69 +29,85 @@ const ButtonsContainer = styled.div`
 
 const NavLink = styled.a`
   text-decoration: none;
-  border: 1px solid #0079d3;
+  border: 1px solid ${props => props.theme.accentBorder};
   border-radius: 999px;
   padding: 8px 40px;
-  color: #0079d3;
+  color: ${props => props.theme.primaryAccentTextColor};
   font-weight: 600;
   margin-left: 10px;
 
   &:hover {
-    background:#f4f9fd;
+    background:${props => props.theme.primaryAccentBackgroundHover};
   }
 
   &:focus {
-    background:#eaf4fb;
+    background:${props => props.theme.primaryAccentBackgroundFocus};
   }
 
   &:active {
-    background: #d5e9f7;
+    background:${props => props.theme.primaryAccentBackgroundActive};
   }
 `
 
-const NavLinkAlternate = styled.a`
-  text-decoration: none;
-  border: 1px solid #0079d3;
-  border-radius: 999px;
-  padding: 8px 40px;
-  color: #fff;
-  font-weight: 600;
-  margin-left: 10px;
+const NavLinkAlternate = styled(NavLink)`
+  color: ${props => props.theme.secondaryAccentTextColor};
 
-  background: #0079d3;
+  background: ${props => props.theme.secondaryAccentBackground};
   
   &:hover {
-    background:#1483d6;
+    background:${props => props.theme.secondaryAccentBackgroundHover};
   }
 
   &:focus {
-    background:#298eda;
+    background:${props => props.theme.secondaryAccentBackgroundFocus};
   }
 
   &:active {
-    background: #3d99dd;
+    background:${props => props.theme.secondaryAccentBackgroundActive};
   }
+`
+
+const NavBarRight = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `
 
 
 const NavBar = () => {
+
+  const { data } = useMeQuery()
+  const context = useContext(ThemeContext)
+
   return(
     <NavBarContainer>
       <Logo>
         Reddit
       </Logo>
-      <ButtonsContainer>
-        <Link href="/login">
-          <NavLink tabIndex={0}>
+      <NavBarRight>
+        { data?.Me 
+          ?
+          <>
+            {data.Me.email}
+          </>
+          :
+          <ButtonsContainer>
+            <Link href="/login">
+              <NavLink tabIndex={0}>
             Log In
-          </NavLink>
-        </Link>
-        <Link href="/signup">
-          <NavLinkAlternate tabIndex={0}>
+              </NavLink>
+            </Link>
+            <Link href="/signup">
+              <NavLinkAlternate tabIndex={0}>
             Sign Up
-          </NavLinkAlternate>
-        </Link>
-      </ButtonsContainer>
+              </NavLinkAlternate>
+            </Link>
+          </ButtonsContainer>
+        }
+        <button onClick={() => context.toggleDarkMode()}>
+        toggleTheme
+        </button>
+      </NavBarRight>
     </NavBarContainer>
   )
 }

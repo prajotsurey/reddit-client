@@ -15,7 +15,7 @@ const Container = styled.div`
 const LoadMoreButton = styled.button`
   display:block;
   border: none;
-  background: #fff;
+  background: ${props => props.theme.primaryBackground};
   padding: 10px;
   font-size: 1rem;
   border-radius: 5px;
