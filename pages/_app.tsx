@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     width: 100%;
     background:#dae0e6;
-    font-family: Roboto, sans-serif;
+    font-family: 'IBM plex sans', sans-serif;
   }
   html{
     height: 100%;

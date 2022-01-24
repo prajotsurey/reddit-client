@@ -1,6 +1,7 @@
 import { Field, Form, Formik } from 'formik'
 import React from 'react'
 import styled from 'styled-components'
+import FormField from '../components/FormField'
 import { useLoginMutation } from '../generated/graphql'
 import mapToFormikErrors from '../utils/mapToFormikErrors'
 import { getToken, setToken } from '../utils/token'
@@ -40,9 +41,9 @@ const Login = () => {
       >
         {({errors}) => (
           <Form>
-            <Field name="email" type="email"/>
+            <FormField name="email" type="email" label="email"/>
             {errors.email}
-            <Field name="password" type="password"/>
+            <FormField name="password" type="password" label="password"/>
             {errors.password}
             <button type='submit'>login</button>
           </Form>

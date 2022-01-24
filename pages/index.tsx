@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import NavBar from '../components/NavBar'
 import Post from '../components/Post'
 import { useLoginMutation, usePaginatedPostsQuery } from '../generated/graphql'
+import Head from 'next/head'
 
 const Container = styled.div`
   max-width: 600px;
@@ -35,6 +36,11 @@ const Home = () => {
   console.log(data?.paginatedPosts.posts.at(-1))
   return(
     <>
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+      </Head>
       <NavBar/>
       <Container>
         <main>
