@@ -4,11 +4,12 @@ query paginatedPosts($cursor: String){
       id
       title
       content
-
+      createdAt
       creator{
         id
         email
       }
     }
+    hasMore
   }
 }

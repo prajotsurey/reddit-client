@@ -8,10 +8,21 @@ const Container = styled.div`
   max-width: 600px;
   margin: 0rem auto;
   padding-top: 70px;
+  padding-bottom: 15px;
+`
+
+const LoadMoreButton = styled.button`
+  display:block;
+  border: none;
+  background: #fff;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  margin: 0px auto;
 `
 const Home = () => {
 
-  const {data, loading, error} = usePaginatedPostsQuery()
+  const {data, loading, fetchMore} = usePaginatedPostsQuery()
 
   if(loading) {
     return(
@@ -21,7 +32,7 @@ const Home = () => {
     )
   }
 
-  console.log(data?.paginatedPosts.posts)
+  console.log(data?.paginatedPosts.posts.at(-1))
   return(
     <>
       <NavBar/>
@@ -33,6 +44,19 @@ const Home = () => {
                 <Post key={post.id} post={post}/>
               )
             })
+          }
+          { data?.paginatedPosts.hasMore
+            ?
+            <LoadMoreButton type="button" onClick={() => {
+              fetchMore({
+                variables:{
+                  cursor: data?.paginatedPosts.posts.at(-1).createdAt //ts does not have support for array.prototype.at in es2021
+                }
+              })
+            }}>
+                Load more
+            </LoadMoreButton>
+            : <></>
           }
         </main>
       </Container>
