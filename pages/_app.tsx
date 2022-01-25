@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from 'react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { ApolloProvider } from '@apollo/client'
 import client from '../utils/client'
+import Head from 'next/head'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -113,6 +114,10 @@ const App = ({ Component, pageProps }) => {
       <ThemeContext.Provider value={{darkMode, toggleDarkMode}}>
         <ThemeProvider theme={darkMode ? theme.dark : theme.light}>
           <GlobalStyle />
+          <Head>
+            <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+          </Head>
           <Component {...pageProps} />
         </ThemeProvider>
       </ThemeContext.Provider>
