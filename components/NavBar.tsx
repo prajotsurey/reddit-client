@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { useMeQuery } from '../generated/graphql'
 import { ThemeContext } from '../pages/_app'
+import UserMenu from './UserMenu'
 
 const NavBarContainer = styled.nav`
   position: fixed;
@@ -99,9 +100,7 @@ const NavBar = () => {
       <NavBarRight>
         { data?.Me 
           ?
-          <>
-            {data.Me.email}
-          </>
+          <UserMenu email={data.Me.email} />
           :
           <ButtonsContainer>
             <Link href="/login">
