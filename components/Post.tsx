@@ -38,6 +38,7 @@ const StyledInnerLink = styled.a`
 
 const PostTitle = styled.div`
   font-size: 1.1rem;
+  font-weight: 500;
 `
 const PostComponent = ({ post }: any) => {
   

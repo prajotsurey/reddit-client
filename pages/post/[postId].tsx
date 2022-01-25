@@ -23,6 +23,8 @@ const PostContainer = styled.div`
 const VoteSection = styled.div`
   width: 40px;
   border-radius: 8px 0px 0px 8px;
+  background: ${props => props.theme.voteSectionBackground};
+
 `
 const PostData = styled.div`
   padding: 12px 8px;
