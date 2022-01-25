@@ -101,12 +101,12 @@ const App = ({ Component, pageProps }) => {
   const [darkMode, setDarkMode] = useState(false)
 
   useEffect(() => {
-    setDarkMode(Boolean(window.localStorage.getItem('reddit-theme')))
+    setDarkMode(window.localStorage.getItem('reddit-theme') === 'true')
   },[])
 
   const toggleDarkMode = () => {
+    window.localStorage.setItem('reddit-theme', `${!darkMode}`)
     setDarkMode(!darkMode)
-    window.localStorage.setItem('reddit-theme', `${darkMode}`)
   }
 
   return (
