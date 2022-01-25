@@ -58,7 +58,13 @@ const theme = {
     secondaryAccentBackgroundActive: '#3d99dd',
 
     voteSectionBackground: '#f7f9fa',
-    dimColor: '#a5a4a4'
+    dimColor: '#a5a4a4',
+    voteIconStroke: 'rgb(135, 138, 140)',
+    voteButtonHover: 'rgba(26, 26, 27, 0.1)',
+    voteIconStrokeHoverUp: '#cc3700',
+    voteIconStrokeHoverDown: '#5a75cc',
+    voteIconFillUp: '#cc3700',
+    voteIconFillDown: '#5a75cc',
   },
   dark: {
     primaryTextColor:'#d7dadc',
@@ -87,7 +93,12 @@ const theme = {
     secondaryAccentBackgroundActive: '#a9abad',
 
     voteSectionBackground: '#151516',
-
+    voteIconStroke: 'rgb(129, 131, 132)',
+    voteButtonHover: 'rgba(215, 218, 220, 0.1)',
+    voteIconStrokeHoverUp: '#cc3700',
+    voteIconStrokeHoverDown: '#5a75cc',
+    voteIconFillUp: '#cc3700',
+    voteIconFillDown: '#5a75cc',
   }
 }
 

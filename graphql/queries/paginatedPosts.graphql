@@ -9,6 +9,8 @@ query paginatedPosts($cursor: String){
         id
         email
       }
+      voteStatus
+      voteCount
     }
     hasMore
   }

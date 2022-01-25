@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
+import { PaginatedPostsResponse } from '../generated/graphql'
+import VoteSection from './VoteSection'
 
 const PostContainer = styled.div`
   border: 1px solid ${props => props.theme.primaryBorder};
@@ -16,11 +18,7 @@ const PostContainer = styled.div`
     border-color: ${props => props.theme.primaryBorderHover};
   }
 `
-const VoteSection = styled.div`
-  width: 40px;
-  background: ${props => props.theme.voteSectionBackground};
-  border-radius: 8px 0px 0px 8px;
-`
+
 const PostData = styled.div`
   padding: 8px 8px;
   flex:1
@@ -40,13 +38,27 @@ const PostTitle = styled.div`
   font-size: 1.1rem;
   font-weight: 500;
 `
-const PostComponent = ({ post }: any) => {
+
+interface Props {
+  post: { 
+    __typename?: 'Post'
+    id: number
+    title: string
+    content: string
+    createdAt: any
+    voteStatus: number
+    voteCount: number
+    creator: { __typename?: 'User', id: number, email: string } 
+  }
+}
+
+const PostComponent:React.FC<Props> = ({ post }) => {
   
   return(
     <Link href={`/post/${post.id}`}>
       <StyledInnerLink>
         <PostContainer>
-          <VoteSection/>
+          <VoteSection voteCount={post.voteCount} voteStatus={post.voteStatus}/>
           <PostData>
             <PostCreator>
               Posted by {post.creator.email}

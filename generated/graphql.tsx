@@ -160,7 +160,7 @@ export type PaginatedPostsQueryVariables = Exact<{
 }>;
 
 
-export type PaginatedPostsQuery = { __typename?: 'Query', paginatedPosts: { __typename?: 'PaginatedPostsResponse', hasMore: boolean, posts: Array<{ __typename?: 'Post', id: number, title: string, content: string, createdAt: any, creator: { __typename?: 'User', id: number, email: string } }> } };
+export type PaginatedPostsQuery = { __typename?: 'Query', paginatedPosts: { __typename?: 'PaginatedPostsResponse', hasMore: boolean, posts: Array<{ __typename?: 'Post', id: number, title: string, content: string, createdAt: any, voteStatus: number, voteCount: number, creator: { __typename?: 'User', id: number, email: string } }> } };
 
 export type PostQueryVariables = Exact<{
   id: Scalars['Float'];
@@ -256,6 +256,8 @@ export const PaginatedPostsDocument = gql`
         id
         email
       }
+      voteStatus
+      voteCount
     }
     hasMore
   }

@@ -1,3 +1,4 @@
+import { useApolloClient } from '@apollo/client'
 import { Field, Form, Formik } from 'formik'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -65,7 +66,7 @@ const Login = () => {
   const [login] = useLoginMutation()
   const router = useRouter()
   const { data } = useMeQuery()
-
+  const apolloClient = useApolloClient()
   console.log(data)
 
   if(data?.Me) {
@@ -92,6 +93,7 @@ const Login = () => {
                   if(response.data.login.token){
                     setToken(response.data.login.token)
                     router.push('/')
+                    await apolloClient.resetStore()
                   } else {
                     setErrors(mapToFormikErrors(response.data.login.errors!))
                   }
