@@ -1,9 +1,10 @@
 import { Form, Formik } from 'formik'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 import FormField from '../components/FormField'
-import { useLoginMutation } from '../generated/graphql'
+import { useLoginMutation, useMeQuery } from '../generated/graphql'
 import mapToFormikErrors from '../utils/mapToFormikErrors'
 import { getToken, setToken } from '../utils/token'
 
@@ -65,7 +66,12 @@ const StyledTextLink = styled.a`
 const Signup = () => {
 
   const [login] = useLoginMutation()
-
+  const { data } = useMeQuery()
+  const router = useRouter()
+  
+  if(data?.Me) {
+    router.push('/')   
+  }
   return(
     <Container>
       <div>

@@ -33,7 +33,6 @@ const Home = () => {
     )
   }
 
-  console.log(data?.paginatedPosts.posts.at(-1))
   return(
     <>
       <Head>

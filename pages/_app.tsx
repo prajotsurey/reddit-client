@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { ApolloProvider } from '@apollo/client'
 import client from '../utils/client'
@@ -91,20 +91,26 @@ const theme = {
 }
 
 export const ThemeContext = createContext({
-  toggleDarkMode: () => {}
+  darkMode: false,
+  toggleDarkMode: () => {},
 })
 
 
 const App = ({ Component, pageProps }) => {
   const [darkMode, setDarkMode] = useState(false)
 
+  useEffect(() => {
+    setDarkMode(Boolean(window.localStorage.getItem('reddit-theme')))
+  },[])
+
   const toggleDarkMode = () => {
     setDarkMode(!darkMode)
+    window.localStorage.setItem('reddit-theme', `${darkMode}`)
   }
 
   return (
     <ApolloProvider client={client}>
-      <ThemeContext.Provider value={{toggleDarkMode}}>
+      <ThemeContext.Provider value={{darkMode, toggleDarkMode}}>
         <ThemeProvider theme={darkMode ? theme.dark : theme.light}>
           <GlobalStyle />
           <Component {...pageProps} />

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 import FormField from '../components/FormField'
-import { useLoginMutation } from '../generated/graphql'
+import { useLoginMutation, useMeQuery } from '../generated/graphql'
 import mapToFormikErrors from '../utils/mapToFormikErrors'
 import { getToken, setToken } from '../utils/token'
 
@@ -63,6 +63,13 @@ const StyledTextLink = styled.a`
 const Login = () => {
   const [login] = useLoginMutation()
   const router = useRouter()
+  const { data } = useMeQuery()
+
+  console.log(data)
+
+  if(data?.Me) {
+    router.push('/')   
+  }
 
   return(
     <Container>
