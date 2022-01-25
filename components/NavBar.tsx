@@ -17,10 +17,6 @@ const NavBarContainer = styled.nav`
   justify-content: space-between;
   padding: 0px 30px;
 `
-const Logo = styled.div`
-  font-weight: 500;
-  font-size: 1.3rem;
-`
 
 const ButtonsContainer = styled.div`
   display: flex;
@@ -83,7 +79,11 @@ const ThemeIcon = styled.svg`
   border: none;
   height: 20px;
 `
-
+const Logo = styled.a`
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1.4em;
+`
 const NavBar = () => {
 
   const { data } = useMeQuery()
@@ -91,9 +91,11 @@ const NavBar = () => {
 
   return(
     <NavBarContainer>
-      <Logo>
-        Reddit
-      </Logo>
+      <Link href="/">
+        <Logo>
+            Reddit
+        </Logo>
+      </Link>
       <NavBarRight>
         { data?.Me 
           ?

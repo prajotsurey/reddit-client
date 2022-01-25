@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 import FormField from '../components/FormField'
+import NavBar from '../components/NavBar'
 import { useLoginMutation, useMeQuery } from '../generated/graphql'
 import mapToFormikErrors from '../utils/mapToFormikErrors'
 import { getToken, setToken } from '../utils/token'
@@ -73,53 +74,56 @@ const Signup = () => {
     router.push('/')   
   }
   return(
-    <Container>
-      <div>
-        <LightHeading>
+    <>
+      <NavBar/>
+      <Container>
+        <div>
+          <LightHeading>
           Sign Up
-        </LightHeading>
-        <Formik
-          initialValues={{
-            email: '',
-            password: ''
-          }}
-          onSubmit={async ({email, password}, {setErrors}) => {
-            try{
-              const response = await login({ variables: {email,password}})
-              if(response.data){
-                if(response.data.login.token){
-                  setToken(response.data.login.token)
-                  console.log(getToken())
-                } else {
-                  setErrors(mapToFormikErrors(response.data.login.errors!))
+          </LightHeading>
+          <Formik
+            initialValues={{
+              email: '',
+              password: ''
+            }}
+            onSubmit={async ({email, password}, {setErrors}) => {
+              try{
+                const response = await login({ variables: {email,password}})
+                if(response.data){
+                  if(response.data.login.token){
+                    setToken(response.data.login.token)
+                    console.log(getToken())
+                  } else {
+                    setErrors(mapToFormikErrors(response.data.login.errors!))
+                  }
                 }
+              } catch(err) {
+                console.log(err)
               }
-            } catch(err) {
-              console.log(err)
-            }
           
-          }}
-        >
-          {({errors}) => (
-            <Form>
-              <FormField name="email" type="email" label="email"/>
-              {errors.email}
-              <FormField name="password" type="password" label="password"/>
-              {errors.password}
-              <FormButton type='submit'>Sign Up</FormButton>
-            </Form>
-          )}
-        </Formik>
-        <LightMinorText>
+            }}
+          >
+            {({errors}) => (
+              <Form>
+                <FormField name="email" type="email" label="email"/>
+                {errors.email}
+                <FormField name="password" type="password" label="password"/>
+                {errors.password}
+                <FormButton type='submit'>Sign Up</FormButton>
+              </Form>
+            )}
+          </Formik>
+          <LightMinorText>
           Already a redditor? {' '}
-          <Link href="/login">
-            <StyledTextLink >
+            <Link href="/login">
+              <StyledTextLink >
               LOG IN     
-            </StyledTextLink>
-          </Link>
-        </LightMinorText>
-      </div>
-    </Container>
+              </StyledTextLink>
+            </Link>
+          </LightMinorText>
+        </div>
+      </Container>
+    </>
   )
 }
 
