@@ -41,7 +41,7 @@ const VoteIconUp = styled(VoteIcon)`
 const VoteIconDown = styled(VoteIcon)`
 
   fill:  ${props => props.voteStatus === -1 ? props.theme.voteIconFillDown : 'none'};
-  stroke: ${props => props.voteStatus === -1 ? props.theme.voteIconStrokeDown : props.theme.voteIconStroke};
+  stroke: ${props => props.voteStatus === -1 ? props.theme.voteIconStrokeHoverDown : props.theme.voteIconStroke};
 
   ${VoteButton}:hover &{
     stroke: ${props => props.theme.voteIconStrokeHoverDown};
