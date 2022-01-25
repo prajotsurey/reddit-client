@@ -59,7 +59,7 @@ const tokenRefreshLink = new TokenRefreshLink({
 
 
 const client = new ApolloClient({
-  link: ApolloLink.from([ tokenRefreshLink,authLink.concat(httpLink)]) ,
+  link: ApolloLink.from([ tokenRefreshLink,authLink.concat(httpLink)]),
   cache: new InMemoryCache({
     typePolicies:{
       Query: {

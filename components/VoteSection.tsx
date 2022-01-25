@@ -1,3 +1,4 @@
+import { ApolloCache, gql } from '@apollo/client'
 import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
@@ -61,9 +62,59 @@ interface Props {
 const VoteSection:React.FC<Props> = ({voteStatus, voteCount, id}) => {
   const [vote] = useVoteMutation()
   const router = useRouter()
+
+  const updateCache = async(cache:ApolloCache<any>,direction:number) => {
+    const post = cache.readFragment<{
+      id: number,
+      voteStatus: number,
+      voteCount: number
+    }>({
+      id: `Post:${id}`,
+      fragment: gql`
+        fragment MyPost on Post {
+          id
+          voteStatus
+          voteCount
+        }
+      `,
+    })
+
+    if(post){
+
+      let newVoteStatus = 0
+      let newVoteCount = 0
+      if(post.voteStatus === 0) {
+        newVoteStatus = direction
+        newVoteCount = post.voteCount + direction
+      } else {
+        newVoteStatus = post.voteStatus === direction ? 0 : direction
+        newVoteCount = post.voteStatus === direction ? post.voteCount - direction : post.voteCount +2*direction
+      }
+
+      cache.writeFragment({
+        id: `Post:${id}`,
+        fragment: gql`
+          fragment MyPost on Post {
+            id
+            voteStatus
+            voteCount
+          }
+        `,
+        data:{
+          id,
+          voteStatus : newVoteStatus,
+          voteCount: newVoteCount
+        }
+      })
+    }
+
+
+    console.log(post)
+  }
+
   const handleUpClick = async() => {
     try{
-      const response = await vote({variables: {id, value:1}})
+      const response = await vote({variables: {id, value:1}, update: (cache) => updateCache(cache,+1) })
     } catch (error) {
       if(error.message === 'Error while voting post. Try logging in again.') {
         router.push('/login')
@@ -74,7 +125,7 @@ const VoteSection:React.FC<Props> = ({voteStatus, voteCount, id}) => {
 
   const handleDownClick = async() => {
     try{
-      const response = await vote({variables: {id, value:-1}})
+      const response = await vote({variables: {id, value:-1}, update: (cache) => updateCache(cache,-1) })
     } catch (err) {
       if(error.message === 'Error while voting post. Try logging in again.') {
         router.push('/login')
