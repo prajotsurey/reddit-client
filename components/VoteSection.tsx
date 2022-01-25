@@ -64,8 +64,8 @@ const VoteSection:React.FC<Props> = ({voteStatus, voteCount, id}) => {
   const handleUpClick = async() => {
     try{
       const response = await vote({variables: {id, value:1}})
-    } catch (err) {
-      if(err.message === 'Error while voting post. Try logging in again.') {
+    } catch (error) {
+      if(error.message === 'Error while voting post. Try logging in again.') {
         router.push('/login')
       }
     }
@@ -76,7 +76,7 @@ const VoteSection:React.FC<Props> = ({voteStatus, voteCount, id}) => {
     try{
       const response = await vote({variables: {id, value:-1}})
     } catch (err) {
-      if(err.message === 'Error while voting post. Try logging in again.') {
+      if(error.message === 'Error while voting post. Try logging in again.') {
         router.push('/login')
       }
     }
