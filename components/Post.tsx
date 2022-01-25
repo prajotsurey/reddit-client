@@ -55,10 +55,11 @@ interface Props {
 const PostComponent:React.FC<Props> = ({ post }) => {
   
   return(
-    <Link href={`/post/${post.id}`}>
-      <StyledInnerLink>
-        <PostContainer>
-          <VoteSection voteCount={post.voteCount} voteStatus={post.voteStatus}/>
+
+    <PostContainer>
+      <VoteSection voteCount={post.voteCount} voteStatus={post.voteStatus} id={post.id}/>
+      <Link href={`/post/${post.id}`}>
+        <StyledInnerLink>
           <PostData>
             <PostCreator>
               Posted by {post.creator.email}
@@ -67,9 +68,10 @@ const PostComponent:React.FC<Props> = ({ post }) => {
               {post.title}
             </PostTitle>
           </PostData>
-        </PostContainer>
-      </StyledInnerLink>
-    </Link>
+        </StyledInnerLink>
+      </Link>
+    </PostContainer>
+  
   )
 }
 
