@@ -85,9 +85,15 @@ export type Query = {
   __typename?: 'Query';
   Me: User;
   helloWorld: Scalars['String'];
+  myPaginatedPosts: PaginatedPostsResponse;
   paginatedPosts: PaginatedPostsResponse;
   post: Post;
   posts: Array<Post>;
+};
+
+
+export type QueryMyPaginatedPostsArgs = {
+  cursor?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -175,6 +181,13 @@ export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type MeQuery = { __typename?: 'Query', Me: { __typename?: 'User', id: number, email: string, createdAt: any } };
+
+export type MyPaginatedPostsQueryVariables = Exact<{
+  cursor?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type MyPaginatedPostsQuery = { __typename?: 'Query', myPaginatedPosts: { __typename?: 'PaginatedPostsResponse', hasMore: boolean, posts: Array<{ __typename?: 'Post', id: number, createdAt: any, title: string, voteCount: number, content: string, voteStatus: number, creator: { __typename?: 'User', id: number, email: string } }> } };
 
 export type PaginatedPostsQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['String']>;
@@ -367,6 +380,53 @@ export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const MyPaginatedPostsDocument = gql`
+    query MyPaginatedPosts($cursor: String) {
+  myPaginatedPosts(cursor: $cursor) {
+    posts {
+      id
+      createdAt
+      creator {
+        id
+        email
+      }
+      title
+      voteCount
+      content
+      voteStatus
+    }
+    hasMore
+  }
+}
+    `;
+
+/**
+ * __useMyPaginatedPostsQuery__
+ *
+ * To run a query within a React component, call `useMyPaginatedPostsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMyPaginatedPostsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMyPaginatedPostsQuery({
+ *   variables: {
+ *      cursor: // value for 'cursor'
+ *   },
+ * });
+ */
+export function useMyPaginatedPostsQuery(baseOptions?: Apollo.QueryHookOptions<MyPaginatedPostsQuery, MyPaginatedPostsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MyPaginatedPostsQuery, MyPaginatedPostsQueryVariables>(MyPaginatedPostsDocument, options);
+      }
+export function useMyPaginatedPostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MyPaginatedPostsQuery, MyPaginatedPostsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MyPaginatedPostsQuery, MyPaginatedPostsQueryVariables>(MyPaginatedPostsDocument, options);
+        }
+export type MyPaginatedPostsQueryHookResult = ReturnType<typeof useMyPaginatedPostsQuery>;
+export type MyPaginatedPostsLazyQueryHookResult = ReturnType<typeof useMyPaginatedPostsLazyQuery>;
+export type MyPaginatedPostsQueryResult = Apollo.QueryResult<MyPaginatedPostsQuery, MyPaginatedPostsQueryVariables>;
 export const PaginatedPostsDocument = gql`
     query paginatedPosts($cursor: String) {
   paginatedPosts(cursor: $cursor) {

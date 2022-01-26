@@ -1,0 +1,17 @@
+query MyPaginatedPosts($cursor: String){
+  myPaginatedPosts(cursor: $cursor){
+    posts{
+      id
+      createdAt
+      creator{
+        id
+        email
+      }
+      title
+      voteCount
+      content
+      voteStatus
+    }
+    hasMore
+  }
+}
