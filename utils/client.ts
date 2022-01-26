@@ -74,6 +74,17 @@ const client = new ApolloClient({
                 posts: [...(existing?.posts || []), ...incoming?.posts]
               }
             }
+          },
+          myPaginatedPosts: {
+            keyArgs: false,
+            merge(existing: PaginatedPostsResponse | undefined , 
+              incoming: PaginatedPostsResponse): PaginatedPostsResponse {
+              return {
+                ...incoming,
+                // eslint-disable-next-line no-unsafe-optional-chaining
+                posts: [...(existing?.posts || []), ...incoming?.posts]
+              }
+            }
           }
         }
       }

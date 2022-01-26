@@ -22,11 +22,20 @@ const PostsSection = styled.div`
   padding: 0px 20px;
 `
 
-
+const LoadMoreButton = styled.button`
+  display:block;
+  border: none;
+  background: ${props => props.theme.primaryBackground};
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  margin: 0px auto;
+  color: ${props => props.theme.primaryTextColor};
+`
 
 const Profile = () => {
   const {data,loading,error} = useMeQuery()
-  const {data:postData,loading:postLoading,error:postError} = useMyPaginatedPostsQuery({errorPolicy: 'all'})
+  const {data:postData,loading:postLoading,error:postError, fetchMore} = useMyPaginatedPostsQuery({errorPolicy: 'all'})
   const router = useRouter()
   if(loading || postLoading) {
     return(
@@ -56,6 +65,19 @@ const Profile = () => {
               <PostComponent post={post}/>
             </>
           ))}
+          { postData?.myPaginatedPosts.hasMore
+            ?
+            <LoadMoreButton type="button" onClick={() => {
+              fetchMore({
+                variables:{
+                  cursor: postData?.myPaginatedPosts.posts.at(-1).createdAt //ts does not have support for array.prototype.at in es2021
+                }
+              })
+            }}>
+                Load more
+            </LoadMoreButton>
+            : <></>
+          }
         </PostsSection>
         <ProfileSection user={data?.Me} />
       </Container>
