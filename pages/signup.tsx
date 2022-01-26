@@ -5,7 +5,7 @@ import React from 'react'
 import styled from 'styled-components'
 import FormField from '../components/FormField'
 import NavBar from '../components/NavBar'
-import { useLoginMutation, useMeQuery } from '../generated/graphql'
+import { useLoginMutation, useMeQuery, useRegisterUserMutation } from '../generated/graphql'
 import mapToFormikErrors from '../utils/mapToFormikErrors'
 import { getToken, setToken } from '../utils/token'
 
@@ -66,7 +66,7 @@ const StyledTextLink = styled.a`
 
 const Signup = () => {
 
-  const [login] = useLoginMutation()
+  const [registerUser] = useRegisterUserMutation()
   const { data } = useMeQuery()
   const router = useRouter()
   
@@ -88,13 +88,12 @@ const Signup = () => {
             }}
             onSubmit={async ({email, password}, {setErrors}) => {
               try{
-                const response = await login({ variables: {email,password}})
+                const response = await registerUser({ variables: {email,password}})
                 if(response.data){
-                  if(response.data.login.token){
-                    setToken(response.data.login.token)
-                    console.log(getToken())
+                  if(response.data.registerUser.user){
+                    router.push('/login')
                   } else {
-                    setErrors(mapToFormikErrors(response.data.login.errors!))
+                    setErrors(mapToFormikErrors(response.data.registerUser.errors!))
                   }
                 }
               } catch(err) {
