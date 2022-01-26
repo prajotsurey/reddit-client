@@ -1,55 +1,41 @@
+import { useApolloClient } from '@apollo/client'
 import Link from 'next/link'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { useMeQuery } from '../generated/graphql'
+import { useLogoutMutation, useMeQuery } from '../generated/graphql'
 import { ThemeContext } from '../pages/_app'
+import { getToken, setToken } from '../utils/token'
 import UserMenu from './UserMenu'
 
-const NavBarContainer = styled.nav`
+const SidebarContainer = styled.nav`
   position: fixed;
   top: 0;
   left:0;
-  right:0;
-  height: 50px;
-  background: ${props => props.theme.primaryBackground};
+  bottom:0;
+  width:100%;
+  box-sizing:border-box;
   display:flex;
-  flex-direction:row;
-  align-items:center;
-  justify-content: space-between;
+  flex-direction:column;
   padding: 0px 30px;
-
-
+  flex-direction:column;
+  justify-content: start;
+  align-items:start;
+  background: ${props => props.theme.mainBackground};
+  color: ${props => props.theme.primaryAccentTextColor};
+  font-weight: 500;
+  transition: transform 0.2s ease-out;
+  transform: ${props => props.sideBarOpen ? 'translateX(0)':'translateX(-100%)'};
 `
 
-const ButtonsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-
-`
-
-const NavLink = styled.a`
+const SideLink = styled.a`
+  display: block;
   text-decoration: none;
   border: 1px solid ${props => props.theme.accentBorder};
-  border-radius: 999px;
-  padding: 8px 40px;
-  color: ${props => props.theme.primaryAccentTextColor};
+  border-radius: 5px;
+  padding: 8px ;
+  text-align:center;
   font-weight: 600;
-  margin-left: 10px;
-
-  &:hover {
-    background:${props => props.theme.primaryAccentBackgroundHover};
-  }
-
-  &:focus {
-    background:${props => props.theme.primaryAccentBackgroundFocus};
-  }
-
-  &:active {
-    background:${props => props.theme.primaryAccentBackgroundActive};
-  }
-`
-
-const NavLinkAlternate = styled(NavLink)`
+  margin-bottom: 10px;
   color: ${props => props.theme.secondaryAccentTextColor};
 
   background: ${props => props.theme.secondaryAccentBackground};
@@ -66,15 +52,35 @@ const NavLinkAlternate = styled(NavLink)`
     background:${props => props.theme.secondaryAccentBackgroundActive};
   }
 `
+const SideButton = styled.button`
+  display: block;
+  text-decoration: none;
+  border: 1px solid ${props => props.theme.accentBorder};
+  border-radius: 5px;
+  padding: 8px ;
+  text-align:center;
+  font-weight: 600;
+  margin-bottom: 10px;
+  width: 100%;
+  color: ${props => props.theme.secondaryAccentTextColor};
 
-const NavBarRight = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  background: ${props => props.theme.secondaryAccentBackground};
 
-  @media(max-width:480px){
-    display: none;
+  &:hover {
+    background:${props => props.theme.secondaryAccentBackgroundHover};
   }
+
+  &:focus {
+    background:${props => props.theme.secondaryAccentBackgroundFocus};
+  }
+
+  &:active {
+    background:${props => props.theme.secondaryAccentBackgroundActive};
+  }
+`
+const LinksContainer = styled.div`
+  margin-top:10px;
+  width:100%;
 `
 
 const ToggleButton = styled.button`
@@ -87,56 +93,56 @@ const ThemeIcon = styled.svg`
   border: none;
   height: 20px;
 `
+const NavTop = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+  padding: 10px 0px;
+  align-items:center;
+`
+
 const Logo = styled.a`
   text-decoration: none;
   cursor: pointer;
   font-size: 1.4em;
+  font-weight: 500;
+`
+
+const SidebarEmail = styled.div`
+  margin-bottom: 10px;
 `
 
 const SidebarToggle = styled.button`
   background: none;
   border: none;
-
-  @media(min-width: 481px){
-    display:none;
-  }
+  padding:2px;
 `
 
 const SidebarToggleSvg = styled.svg`
-  fill: ${props => props.theme.primaryTextColor};
+  stroke: ${props => props.theme.primaryTextColor};
 `
+interface Props  {
+  sideBarOpen : boolean,
+  toggle: (arg:boolean) => void
+}
 
 
-const NavBar = ({toggle}) => {
+const SideBar:React.FC<Props> = ({sideBarOpen, toggle}) => {
 
   const { data } = useMeQuery()
   const context = useContext(ThemeContext)
+  const [logout] = useLogoutMutation()
+  const apolloClient = useApolloClient()
 
   return(
-    <NavBarContainer>
-      <Link href="/">
-        <Logo>
+    <SidebarContainer sideBarOpen={sideBarOpen}>
+      <NavTop>
+        <Link href="/">
+          <Logo>
             Reddit
-        </Logo>
-      </Link>
-      <NavBarRight>
-        { data?.Me 
-          ?
-          <UserMenu email={data.Me.email} />
-          :
-          <ButtonsContainer>
-            <Link href="/login">
-              <NavLink tabIndex={0}>
-            Log In
-              </NavLink>
-            </Link>
-            <Link href="/signup">
-              <NavLinkAlternate tabIndex={0}>
-            Sign Up
-              </NavLinkAlternate>
-            </Link>
-          </ButtonsContainer>
-        }
+          </Logo>
+        </Link>
         <ToggleButton onClick={() => context.toggleDarkMode()}>
           {context.darkMode 
             ? <ThemeIcon width="30" height="30" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -148,14 +154,52 @@ const NavBar = ({toggle}) => {
             </ThemeIcon>
           }
         </ToggleButton>
-      </NavBarRight>
-      <SidebarToggle onClick={() => toggle(true)}>
-        <SidebarToggleSvg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 3H20V0H0V3ZM0 13H20V10H0V13ZM0 23H20V20H0V23Z" />
-        </SidebarToggleSvg>
-      </SidebarToggle>
-    </NavBarContainer>
+        <SidebarToggle onClick={() => toggle(false)}>
+          <SidebarToggleSvg width="30" height="29" viewBox="0 0 30 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.92893 7.42893L22.0711 21.5711"  strokeWidth="3"/>
+            <path d="M7.92893 21.5711L22.0711 7.42892"  strokeWidth="3"/>
+          </SidebarToggleSvg>
+
+        </SidebarToggle>
+      </NavTop>
+      <LinksContainer>
+        { data?.Me 
+          ?
+          <>
+            <SidebarEmail>
+              {data.Me.email}
+            </SidebarEmail>
+            <Link href="/createPost">
+              <SideLink tabIndex={0}>
+                New Post
+              </SideLink>
+            </Link>
+            <SideButton onClick={async () => {
+              await logout()
+              setToken('')
+              await apolloClient.resetStore()
+            }} tabIndex={0}>
+                Logout
+            </SideButton>
+          </>
+          :
+          <>
+            <Link href="/login">
+              <SideLink tabIndex={0}>
+            Log In
+              </SideLink>
+            </Link>
+            <Link href="/signup">
+              <SideLink tabIndex={0}>
+            Sign Up
+              </SideLink>
+            </Link>
+          </>
+        }
+
+      </LinksContainer>
+    </SidebarContainer>
   )
 }
 
-export default NavBar
+export default SideBar

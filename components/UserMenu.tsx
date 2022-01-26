@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useLogoutMutation } from '../generated/graphql'
 import { gql, useApolloClient } from '@apollo/client'
+import { setToken } from '../utils/token'
 
 
 const DropDownContainer = styled.div`
@@ -55,6 +56,7 @@ const UserMenu:React.FC<{email:string}> = ({email}) => {
           </ListElement>
           <ListElement onClick={async () => {
             await logout()
+            setToken('')
             await apolloClient.resetStore()
           }}>
             Logout  

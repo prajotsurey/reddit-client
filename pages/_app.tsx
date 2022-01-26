@@ -67,6 +67,7 @@ const theme = {
     voteIconFillDown: '#5a75cc',
 
     errorBorder: '#ea0027',
+    sideBarBackground: '#0079d3',
 
   },
   dark: {
@@ -103,7 +104,7 @@ const theme = {
     voteIconFillUp: '#cc3700',
     voteIconFillDown: '#5a75cc',
     dimColor: 'rgb(129, 131, 132)',
-
+    sideBarBackground: '#1a1a1b',
     errorBorder: '#ea0027',
   }
 }

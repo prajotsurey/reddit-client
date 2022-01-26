@@ -4,6 +4,8 @@ import NavBar from '../components/NavBar'
 import Post from '../components/Post'
 import { useLoginMutation, usePaginatedPostsQuery } from '../generated/graphql'
 import Head from 'next/head'
+import SideBar from '../components/Sidebar'
+import Header from '../components/Header'
 
 const Container = styled.div`
   max-width: 600px;
@@ -40,7 +42,7 @@ const Home = () => {
         reddit.com
         </title>
       </Head>
-      <NavBar/>
+      <Header/>
       <Container>
         <main>
           {
