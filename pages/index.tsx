@@ -10,8 +10,7 @@ import Header from '../components/Header'
 const Container = styled.div`
   max-width: 600px;
   margin: 0rem auto;
-  padding-top: 70px;
-  padding-bottom: 15px;
+  padding: 70px 10px 15px 10px;
 `
 
 const LoadMoreButton = styled.button`

@@ -10,7 +10,7 @@ import { useMeQuery, useMyPaginatedPostsQuery } from '../generated/graphql'
 const Container = styled.div`
   max-width: 960px;
   margin: 0px auto;
-  padding-top: 70px;
+  padding: 70px 10px 15px 10px;
   display:flex;
   flex-direction: row;
 `
