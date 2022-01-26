@@ -63,10 +63,10 @@ const DropDownButton = styled.button`
 `
 
 const DropDownSvg = styled.svg`
-  stroke : ${props => props.theme.voteIconStroke};
+  stroke : ${props => props.theme.primaryAccentTextColor};
 
   & .path {
-    fill : ${props => props.theme.voteIconStroke};
+    fill : ${props => props.theme.primaryAccentTextColor};
   }
 `
 const UserMenu = () => {
