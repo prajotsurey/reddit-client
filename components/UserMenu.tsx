@@ -21,7 +21,16 @@ const List = styled.ul`
 `
 const ListElement = styled.li`
   font-weight: 500;
-  padding: 10px 10px;
+
+`
+
+const StyledInnerLink = styled.a`
+padding: 10px 10px;
+box-sizing:border-box;
+display:block;
+  width: 100%;
+  cursor: pointer;
+  text-decoration: none;
   color: ${props => props.theme.dimColor};
   border-radius: 5px;
   &:hover {
@@ -30,9 +39,19 @@ const ListElement = styled.li`
   }
 `
 
-const StyledInnerLink = styled.a`
+const StyledInnerButton = styled.a`
+padding: 10px 10px;
+box-sizing:border-box;
+display:block;
+  width: 100%;
   cursor: pointer;
   text-decoration: none;
+  color: ${props => props.theme.dimColor};
+  border-radius: 5px;
+  &:hover {
+    background-color: ${props => props.theme.secondaryAccentBackground};
+    color: ${props => props.theme.secondaryAccentTextColor};
+  }
 `
 
 const UserMenu:React.FC<{email:string}> = ({email}) => {
@@ -54,12 +73,14 @@ const UserMenu:React.FC<{email:string}> = ({email}) => {
               </StyledInnerLink>
             </Link>
           </ListElement>
-          <ListElement onClick={async () => {
-            await logout()
-            setToken('')
-            await apolloClient.resetStore()
-          }}>
+          <ListElement >
+            <StyledInnerButton onClick={async () => {
+              await logout()
+              setToken('')
+              await apolloClient.resetStore()
+            }}>
             Logout  
+            </StyledInnerButton>
           </ListElement> 
         </List> 
       </DropDownContainer>
