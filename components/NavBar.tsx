@@ -82,6 +82,7 @@ const ToggleButton = styled.button`
   background: none;
   height: 20px;
   margin-left:15px;
+  padding: 0px;
 `
 const ThemeIcon = styled.svg`
   background: none;
@@ -157,7 +158,8 @@ const NavBar:React.FC<props> = ({toggle}) => {
                 </CreatePostSvg>
               </CreatePostLink>
             </Link>
-            <UserMenu email={data.Me.email} />
+            {data.Me.email}
+            <UserMenu/>
           </>
           :
           <ButtonsContainer>
