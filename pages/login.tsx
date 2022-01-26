@@ -99,17 +99,15 @@ const Login = () => {
                   }
                 }
               } catch(err) {
-                console.log(err)
+                console
               }
           
             }}
           >
-            {({errors}) => (
+            {() => (
               <Form>
                 <FormField name="email" type="email" label="email"/>
-                {errors.email}
                 <FormField name="password" type="password" label="password"/>
-                {errors.password}
                 <FormButton type='submit'>Log In</FormButton>
               </Form>
             )}
