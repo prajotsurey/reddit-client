@@ -103,12 +103,10 @@ const Signup = () => {
           
             }}
           >
-            {({errors}) => (
+            {() => (
               <Form>
                 <FormField name="email" type="email" label="email"/>
-                {errors.email}
                 <FormField name="password" type="password" label="password"/>
-                {errors.password}
                 <FormButton type='submit'>Sign Up</FormButton>
               </Form>
             )}
