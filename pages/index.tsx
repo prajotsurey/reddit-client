@@ -22,6 +22,21 @@ const LoadMoreButton = styled.button`
   border-radius: 5px;
   margin: 0px auto;
   color: ${props => props.theme.primaryTextColor};
+  border: 1px solid ${props => props.theme.primaryBorder};
+
+  &:hover {
+    background:${props => props.theme.primaryAccentBackgroundHover};
+    border-color: ${props => props.theme.primaryBorderHover};
+
+  }
+
+  &:focus {
+    background:${props => props.theme.primaryAccentBackgroundFocus};
+  }
+
+  &:active {
+    background:${props => props.theme.primaryAccentBackgroundActive};
+  }
 `
 const Home = () => {
 
