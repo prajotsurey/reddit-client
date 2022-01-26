@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 import FormField from '../components/FormField'
+import Header from '../components/Header'
 import NavBar from '../components/NavBar'
 import { useLoginMutation, useMeQuery } from '../generated/graphql'
 import mapToFormikErrors from '../utils/mapToFormikErrors'
@@ -90,7 +91,8 @@ const Login = () => {
         reddit.com:Log in
         </title>
       </Head>
-      <NavBar />
+      <Header/>
+
       <Container>
         <FormContainer>
           <Formik

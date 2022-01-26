@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 import FormField from '../components/FormField'
+import Header from '../components/Header'
 import NavBar from '../components/NavBar'
 import { useMeQuery, useRegisterUserMutation } from '../generated/graphql'
 import mapToFormikErrors from '../utils/mapToFormikErrors'
@@ -80,7 +81,7 @@ const Signup = () => {
         reddit.com: Sign Up
         </title>
       </Head>
-      <NavBar/>
+      <Header/>
       <Container>
         <div>
           <LightHeading>

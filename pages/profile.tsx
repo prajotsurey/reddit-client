@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
+import Header from '../components/Header'
 import NavBar from '../components/NavBar'
 import PostComponent from '../components/Post'
 import ProfileSection from '../components/ProfileSection'
@@ -46,7 +47,7 @@ const Profile = () => {
         reddit.com:Profile
         </title>
       </Head>
-      <NavBar/>
+      <Header/>
       <Container>
         <PostsSection>
           <h1>Posts</h1>
