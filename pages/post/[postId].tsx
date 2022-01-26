@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
+import Header from '../../components/Header'
 import NavBar from '../../components/NavBar'
+import VoteSection from '../../components/VoteSection'
 import { usePostQuery } from '../../generated/graphql'
 
 const Container = styled.div`
@@ -19,12 +21,6 @@ const PostContainer = styled.div`
   display:flex;
   flex-direction:row;
   min-height: 100px;
-`
-const VoteSection = styled.div`
-  width: 40px;
-  border-radius: 8px 0px 0px 8px;
-  background: ${props => props.theme.voteSectionBackground};
-
 `
 const PostData = styled.div`
   padding: 12px 8px;
@@ -62,12 +58,20 @@ const PostDetail = () => {
     )
   }
 
+  if(!data){
+    return(
+      <>
+      unable to load post
+      </>
+    )
+  }
+
   return(
     <>
-      <NavBar />
+      <Header />
       <Container>
         <PostContainer>
-          <VoteSection/>
+          <VoteSection voteCount={data.post.voteCount} voteStatus={data.post.voteStatus} id={data.post.id}/>
           <PostData>
             <PostCreator>
               Posted by {data?.post.creator.email}
