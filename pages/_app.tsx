@@ -132,8 +132,8 @@ const App = ({ Component, pageProps }) => {
         <ThemeProvider theme={darkMode ? theme.dark : theme.light}>
           <GlobalStyle />
           <Head>
+            <title>reddit.com</title>
             <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
           </Head>
           <Component {...pageProps} />
         </ThemeProvider>
