@@ -21,6 +21,7 @@ const LoadMoreButton = styled.button`
   font-size: 1rem;
   border-radius: 5px;
   margin: 0px auto;
+  color: ${props => props.theme.primaryTextColor};
 `
 const Home = () => {
 
