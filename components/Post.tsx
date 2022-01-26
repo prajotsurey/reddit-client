@@ -24,7 +24,7 @@ const PostData = styled.div`
   flex:1
 `
 const PostCreator = styled.div`
-  font-size: 0.6rem;
+  font-size: 0.9rem;
   color:${props => props.theme.dimColor};
   margin-bottom: 8px;
 `
