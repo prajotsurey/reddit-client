@@ -65,6 +65,9 @@ const theme = {
     voteIconStrokeHoverDown: '#5a75cc',
     voteIconFillUp: '#cc3700',
     voteIconFillDown: '#5a75cc',
+
+    errorBorder: '#ea0027',
+
   },
   dark: {
     primaryTextColor:'#d7dadc',
@@ -100,6 +103,8 @@ const theme = {
     voteIconFillUp: '#cc3700',
     voteIconFillDown: '#5a75cc',
     dimColor: 'rgb(129, 131, 132)',
+
+    errorBorder: '#ea0027',
   }
 }
 

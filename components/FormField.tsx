@@ -15,6 +15,7 @@ const CustomInputBox = styled.div`
   background: ${props => props.theme.voteSectionBackground};
   margin-top:10px;
   border-radius: 5px;
+  width:100%;
 `
 
 const CustomInput = styled.input`
@@ -23,8 +24,10 @@ const CustomInput = styled.input`
   line-height: 10px;
   border-radius: 5px;
   outline: none;
+  box-sizing: border-box;
+  width: 100%;
   color: ${props => props.theme.primaryTextColor};
-  border: 1px solid ${props => props.theme.primaryBorder};
+  border: 1px solid ${props => props.meta.error && props.meta.touched ? props.theme.errorBorder : props.theme.primaryBorder };
   background: ${props => props.theme.primaryBackground};
   &:focus {
     border: 1px solid ${props => props.theme.primaryBorderFocus};
@@ -33,6 +36,8 @@ const CustomInput = styled.input`
   &:active {
     border: 1px solid ${props => props.theme.primaryBorderActive};
   }
+
+  
 `
 
 const CustomLabel = styled.label`
@@ -41,7 +46,7 @@ const CustomLabel = styled.label`
   top: 22px;
   left: 12px;
   font-weight: 600;
-  color: ${props => props.theme.dimColor};
+  color: ${props => props.meta.touched && props.meta.error ? props.theme.errorBorder : props.theme.dimColor};
   font-size: 10px;
   transition: all 0.2s ease-out;
   transform: ${props => props.moveTop ? 'translate3d(-3px,-13px,0px) scale(0.9)' : ''};
@@ -61,35 +66,39 @@ const CustomLabel = styled.label`
 `
 
 const ErrorBlock = styled.div`
-  display: block;
+  padding: 5px;
+  color: ${props => props.theme.errorBorder};
+  font-weight: 500;
 `
 
 const FormField:React.FC<FormFieldProps> = ({ label, ...props }) => {
   const [field, meta, helpers] = useField(props)
   const [moveTop, setMoveTop] = useState(false)
   return (
-    <CustomInputBox>
-      <CustomInput {...field} {...props} 
-        onLoad={(e) => {
-          if(e.target.value){
-            setMoveTop(true)
-          } else {
-            setMoveTop(false)
-          }
-        }}
-        onChange={(e) => {
-          field.onChange(e)
-          if(e.target.value){
-            setMoveTop(true)
-          } else {
-            setMoveTop(false)
-          }
-        }}/>
-      <CustomLabel moveTop={moveTop} className="animatedLabel">{label.toUpperCase()}</CustomLabel>
+    <>
+      <CustomInputBox>
+        <CustomInput meta={meta} {...field} {...props} 
+          onLoad={(e) => {
+            if(e.target.value){
+              setMoveTop(true)
+            } else {
+              setMoveTop(false)
+            }
+          }}
+          onChange={(e) => {
+            field.onChange(e)
+            if(e.target.value){
+              setMoveTop(true)
+            } else {
+              setMoveTop(false)
+            }
+          }}/>
+        <CustomLabel meta={meta} moveTop={moveTop} className="animatedLabel">{label.toUpperCase()}</CustomLabel>
+      </CustomInputBox>
       {meta.touched && meta.error ? (
         <ErrorBlock>{meta.error}</ErrorBlock>
       ) : null}
-    </CustomInputBox>
+    </>
   )
 }
 

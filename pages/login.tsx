@@ -62,6 +62,15 @@ const StyledTextLink = styled.a`
 
 `
 
+const StyledForm = styled(Form)`
+  display:block;
+  width:100%:
+`
+const FormContainer = styled.div`
+  width: 250px;
+`
+
+
 const Login = () => {
   const [login] = useLoginMutation()
   const router = useRouter()
@@ -77,10 +86,7 @@ const Login = () => {
     <>
       <NavBar />
       <Container>
-        <div>
-          <LightHeading>
-          Login
-          </LightHeading>
+        <FormContainer>
           <Formik
             initialValues={{
               email: '',
@@ -105,11 +111,14 @@ const Login = () => {
             }}
           >
             {() => (
-              <Form>
+              <StyledForm>
+                <LightHeading>
+                  Login
+                </LightHeading>
                 <FormField name="email" type="email" label="email"/>
                 <FormField name="password" type="password" label="password"/>
                 <FormButton type='submit'>Log In</FormButton>
-              </Form>
+              </StyledForm>
             )}
           </Formik>
           <LightMinorText>
@@ -120,7 +129,7 @@ const Login = () => {
               </StyledTextLink>
             </Link>
           </LightMinorText>
-        </div>
+        </FormContainer>
       </Container>
     </>
   )
