@@ -81,6 +81,7 @@ const ToggleButton = styled.button`
   border: none;
   background: none;
   height: 20px;
+  margin-left:15px;
 `
 const ThemeIcon = styled.svg`
   background: none;
@@ -106,6 +107,27 @@ const SidebarToggleSvg = styled.svg`
   fill: ${props => props.theme.primaryTextColor};
 `
 
+const CreatePostLink = styled.a`
+  fill: ${props => props.theme.secondaryAccentBackground};
+  margin-right: 15px;
+  height: 24px;
+  &:hover {
+    fill:${props => props.theme.secondaryAccentBackgroundHover};
+  }
+
+  &:focus {
+    fill:${props => props.theme.secondaryAccentBackgroundFocus};
+  }
+
+  &:active {
+    fill:${props => props.theme.secondaryAccentBackgroundActive};
+  }
+`
+
+const CreatePostSvg = styled.svg`
+  fill: inherit;
+`
+
 interface props {
   toggle: (arg:boolean) => void
 }
@@ -124,7 +146,19 @@ const NavBar:React.FC<props> = ({toggle}) => {
       <NavBarRight>
         { data?.Me 
           ?
-          <UserMenu email={data.Me.email} />
+          <>
+            <Link href="/createPost">
+              <CreatePostLink tabIndex={0}>
+                <CreatePostSvg width="25" height="24" viewBox="0 0 25 24"  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17.1597 1.94287C18.0286 0.869851 19.6029 0.704391 20.6759 1.5733V1.5733C21.7489 2.44221 21.9143 4.01645 21.0454 5.08947L19.8826 6.5255L15.9968 3.3789L17.1597 1.94287Z" />
+                  <path d="M15.3128 4.22362L19.1985 7.37022L10.99 17.5069L7.10425 14.3603L15.3128 4.22362Z" />
+                  <path d="M5.91733 20.5204C5.53438 20.7096 5.10581 20.3626 5.21129 19.9487L6.2275 15.9612C6.31755 15.6079 6.74331 15.4667 7.02667 15.6961L9.69949 17.8605C9.98285 18.09 9.93323 18.5358 9.60635 18.6974L5.91733 20.5204Z" />
+                  <rect y="22" width="25" height="2" rx="1" />
+                </CreatePostSvg>
+              </CreatePostLink>
+            </Link>
+            <UserMenu email={data.Me.email} />
+          </>
           :
           <ButtonsContainer>
             <Link href="/login">

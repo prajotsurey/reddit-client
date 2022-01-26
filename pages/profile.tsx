@@ -40,10 +40,6 @@ const Profile = () => {
     router.push('/')
   }
 
-  if(postError ){
-    console.log(postError.message)
-  }
-
   return(
     <>
       <Head>
