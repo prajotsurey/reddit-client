@@ -14,12 +14,19 @@ const Container = styled.div`
   padding: 70px 10px 15px 10px;
   display:flex;
   flex-direction: row;
+  align-items:start;
+
+  @media(max-width:750px) {
+    flex-direction: column-reverse;
+    max-width: 600px;
+    align-items:stretch;
+  }
+
 `
 
 const PostsSection = styled.div`
   flex-basis: 640px;
-  flex-shrink: 1;
-  padding: 0px 20px;
+  flex-shrink: 3;
 `
 
 const LoadMoreButton = styled.button`
