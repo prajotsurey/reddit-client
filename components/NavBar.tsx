@@ -106,8 +106,10 @@ const SidebarToggleSvg = styled.svg`
   fill: ${props => props.theme.primaryTextColor};
 `
 
-
-const NavBar = ({toggle}) => {
+interface props {
+  toggle: (arg:boolean) => void
+}
+const NavBar:React.FC<props> = ({toggle}) => {
 
   const { data } = useMeQuery()
   const context = useContext(ThemeContext)
