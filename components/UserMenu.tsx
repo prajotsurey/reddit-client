@@ -31,7 +31,7 @@ display:block;
   width: 100%;
   cursor: pointer;
   text-decoration: none;
-  color: ${props => props.theme.dimColor};
+  color: ${props => props.theme.primaryAccentTextColor};
   border-radius: 5px;
   &:hover {
     background-color: ${props => props.theme.secondaryAccentBackground};
@@ -46,7 +46,7 @@ display:block;
   width: 100%;
   cursor: pointer;
   text-decoration: none;
-  color: ${props => props.theme.dimColor};
+  color: ${props => props.theme.primaryAccentTextColor};
   border-radius: 5px;
   &:hover {
     background-color: ${props => props.theme.secondaryAccentBackground};
