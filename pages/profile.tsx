@@ -26,7 +26,7 @@ const PostsSection = styled.div`
 
 const Profile = () => {
   const {data,loading,error} = useMeQuery()
-  const {data:postData,loading:postLoading,error:postError} = useMyPaginatedPostsQuery()
+  const {data:postData,loading:postLoading,error:postError} = useMyPaginatedPostsQuery({errorPolicy: 'all'})
   const router = useRouter()
   if(loading || postLoading) {
     return(
@@ -38,6 +38,10 @@ const Profile = () => {
 
   if(error || postError){
     router.push('/')
+  }
+
+  if(postError ){
+    console.log(postError.message)
   }
 
   return(
