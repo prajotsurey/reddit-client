@@ -174,6 +174,11 @@ const SideBar:React.FC<Props> = ({sideBarOpen, toggle}) => {
                 New Post
               </SideLink>
             </Link>
+            <Link href="/profile">
+              <SideLink tabIndex={0}>
+                Profile
+              </SideLink>
+            </Link>
             <SideButton onClick={async () => {
               await logout()
               setToken('')
