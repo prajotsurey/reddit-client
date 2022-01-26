@@ -25,6 +25,10 @@ const SidebarContainer = styled.nav`
   font-weight: 500;
   transition: transform 0.2s ease-out;
   transform: ${props => props.sideBarOpen ? 'translateX(0)':'translateX(-100%)'};
+
+  @media(min-width:750px) {
+    transform: translate(-100%);
+  }
 `
 
 const SideLink = styled.a`
