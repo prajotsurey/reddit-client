@@ -100,14 +100,16 @@ const Logo = styled.a`
 const SidebarToggle = styled.button`
   background: none;
   border: none;
-
+  padding: 0px;
+  height:20px;
   @media(min-width: 481px){
     display:none;
   }
 `
 
 const SidebarToggleSvg = styled.svg`
-  fill: ${props => props.theme.primaryTextColor};
+  fill: ${props => props.theme.primaryAccentTextColor};
+
 `
 
 const CreatePostLink = styled.a`
@@ -190,7 +192,7 @@ const NavBar:React.FC<props> = ({toggle}) => {
         </ToggleButton>
       </NavBarRight>
       <SidebarToggle onClick={() => toggle(true)}>
-        <SidebarToggleSvg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <SidebarToggleSvg width="20" height="23" viewBox="0 0 20 23"  xmlns="http://www.w3.org/2000/svg">
           <path d="M0 3H20V0H0V3ZM0 13H20V10H0V13ZM0 23H20V20H0V23Z" />
         </SidebarToggleSvg>
       </SidebarToggle>
