@@ -35,6 +35,11 @@ const Home = () => {
 
   return(
     <>
+      <Head>
+        <title>
+        reddit.com
+        </title>
+      </Head>
       <NavBar/>
       <Container>
         <main>

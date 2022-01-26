@@ -1,5 +1,6 @@
 import { useApolloClient } from '@apollo/client'
-import { Field, Form, Formik } from 'formik'
+import { Form, Formik } from 'formik'
+import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -8,7 +9,7 @@ import FormField from '../components/FormField'
 import NavBar from '../components/NavBar'
 import { useLoginMutation, useMeQuery } from '../generated/graphql'
 import mapToFormikErrors from '../utils/mapToFormikErrors'
-import { getToken, setToken } from '../utils/token'
+import { setToken } from '../utils/token'
 
 const Container = styled.div`
   display: grid;
@@ -84,6 +85,11 @@ const Login = () => {
 
   return(
     <>
+      <Head>
+        <title>
+        reddit.com:Log in
+        </title>
+      </Head>
       <NavBar />
       <Container>
         <FormContainer>

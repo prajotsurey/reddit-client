@@ -1,13 +1,13 @@
 import { Form, Formik } from 'formik'
+import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 import FormField from '../components/FormField'
 import NavBar from '../components/NavBar'
-import { useLoginMutation, useMeQuery, useRegisterUserMutation } from '../generated/graphql'
+import { useMeQuery, useRegisterUserMutation } from '../generated/graphql'
 import mapToFormikErrors from '../utils/mapToFormikErrors'
-import { getToken, setToken } from '../utils/token'
 
 const Container = styled.div`
   display: grid;
@@ -75,6 +75,11 @@ const Signup = () => {
   }
   return(
     <>
+      <Head>
+        <title>
+        reddit.com: Sign Up
+        </title>
+      </Head>
       <NavBar/>
       <Container>
         <div>

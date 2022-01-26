@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useMeQuery } from '../generated/graphql'
@@ -20,6 +21,11 @@ const Profile = () => {
 
   return(
     <>
+      <Head>
+        <title>
+        reddit.com:Profile
+        </title>
+      </Head>
       {data?.Me.email}
     </>
   )
