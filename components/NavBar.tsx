@@ -17,7 +17,7 @@ const NavBarContainer = styled.nav`
   align-items:center;
   justify-content: space-between;
   padding: 0px 30px;
-
+  z-index:4;
 
 `
 
