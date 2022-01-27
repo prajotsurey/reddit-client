@@ -41,7 +41,6 @@ const LoadMoreButton = styled.button`
 const Home = () => {
 
   const {data, loading, fetchMore} = usePaginatedPostsQuery()
-
   if(loading) {
     return(
       <Container>

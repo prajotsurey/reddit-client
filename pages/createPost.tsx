@@ -80,9 +80,19 @@ const CreatePost = () => {
               try{
                 const response = await createPost({ 
                   variables: {title,content},
-                  update: (cache) => {
-                    cache.evict({ fieldName: 'paginatedPosts' })
-                    cache.gc()
+                  update: (cache, {data: {createPost}}) => {
+                    console.log(createPost.post)
+                    cache.modify({
+                      fields: {
+                        paginatedPosts(existingData) {
+                          return {
+                            ...existingData,
+                            posts: [createPost.post, ...existingData.posts.slice(0,9)]
+                          }
+                        }
+                      }
+                    })
+                    
                   },
                 })
                 if(response.data){
