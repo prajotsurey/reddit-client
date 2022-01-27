@@ -1,3 +1,4 @@
+import { gql } from '@apollo/client'
 import { Form, Formik } from 'formik'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
@@ -77,7 +78,13 @@ const CreatePost = () => {
             }}
             onSubmit={async ({title, content}, {setErrors}) => {
               try{
-                const response = await createPost({ variables: {title,content}})
+                const response = await createPost({ 
+                  variables: {title,content},
+                  update: (cache) => {
+                    cache.evict({ fieldName: 'paginatedPosts' })
+                    cache.gc()
+                  },
+                })
                 if(response.data){
                   if(response.data.createPost.post){
                     router.push('/')
