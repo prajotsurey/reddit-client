@@ -1,0 +1,20 @@
+mutation CreatePost($content: String!, $title: String!){
+  createPost(content:$content,title:$title){
+    post{
+      id
+      title
+      content
+      createdAt
+      voteStatus
+      voteCount
+      creator{
+        id
+        email
+      }
+    }
+    errors{
+      field
+      message
+    }
+  }
+}

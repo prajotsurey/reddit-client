@@ -83,7 +83,7 @@ export type Post = {
 
 export type Query = {
   __typename?: 'Query';
-  Me: User;
+  Me?: Maybe<User>;
   helloWorld: Scalars['String'];
   myPaginatedPosts: PaginatedPostsResponse;
   paginatedPosts: PaginatedPostsResponse;
@@ -148,6 +148,14 @@ export type UserInput = {
   password: Scalars['String'];
 };
 
+export type CreatePostMutationVariables = Exact<{
+  content: Scalars['String'];
+  title: Scalars['String'];
+}>;
+
+
+export type CreatePostMutation = { __typename?: 'Mutation', createPost: { __typename?: 'createPostResponse', post?: { __typename?: 'Post', id: number, title: string, content: string, createdAt: any, voteStatus: number, voteCount: number, creator: { __typename?: 'User', id: number, email: string } } | null | undefined, errors?: Array<{ __typename?: 'FormFieldError', field: string, message: string }> | null | undefined } };
+
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
   password: Scalars['String'];
@@ -180,7 +188,7 @@ export type VoteMutation = { __typename?: 'Mutation', vote: string };
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { __typename?: 'Query', Me: { __typename?: 'User', id: number, email: string, createdAt: any } };
+export type MeQuery = { __typename?: 'Query', Me?: { __typename?: 'User', id: number, email: string, createdAt: any } | null | undefined };
 
 export type MyPaginatedPostsQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['String']>;
@@ -204,6 +212,55 @@ export type PostQueryVariables = Exact<{
 export type PostQuery = { __typename?: 'Query', post: { __typename?: 'Post', id: number, title: string, content: string, voteCount: number, voteStatus: number, createdAt: any, creator: { __typename?: 'User', email: string } } };
 
 
+export const CreatePostDocument = gql`
+    mutation CreatePost($content: String!, $title: String!) {
+  createPost(content: $content, title: $title) {
+    post {
+      id
+      title
+      content
+      createdAt
+      voteStatus
+      voteCount
+      creator {
+        id
+        email
+      }
+    }
+    errors {
+      field
+      message
+    }
+  }
+}
+    `;
+export type CreatePostMutationFn = Apollo.MutationFunction<CreatePostMutation, CreatePostMutationVariables>;
+
+/**
+ * __useCreatePostMutation__
+ *
+ * To run a mutation, you first call `useCreatePostMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreatePostMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createPostMutation, { data, loading, error }] = useCreatePostMutation({
+ *   variables: {
+ *      content: // value for 'content'
+ *      title: // value for 'title'
+ *   },
+ * });
+ */
+export function useCreatePostMutation(baseOptions?: Apollo.MutationHookOptions<CreatePostMutation, CreatePostMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreatePostMutation, CreatePostMutationVariables>(CreatePostDocument, options);
+      }
+export type CreatePostMutationHookResult = ReturnType<typeof useCreatePostMutation>;
+export type CreatePostMutationResult = Apollo.MutationResult<CreatePostMutation>;
+export type CreatePostMutationOptions = Apollo.BaseMutationOptions<CreatePostMutation, CreatePostMutationVariables>;
 export const LoginDocument = gql`
     mutation login($email: String!, $password: String!) {
   login(options: {password: $password, email: $email}) {

@@ -74,7 +74,7 @@ const UserMenu = () => {
   const apolloClient = useApolloClient()
   const [logout] = useLogoutMutation()
   return(
-    <>
+    <div>
       <DropDownButton onClick={() => setOpen(!open)}>
         <DropDownSvg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="1.5" y="1.5" width="22" height="22" rx="1.5" strokeWidth="2"/>
@@ -102,7 +102,7 @@ const UserMenu = () => {
           </ListElement> 
         </List> 
       </DropDownContainer>
-    </>
+    </div>
 
   )
 }

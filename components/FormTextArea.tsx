@@ -11,13 +11,12 @@ interface FormFieldProps {
 const CustomInputBox = styled.div`
   display: block;
   position: relative;
-  height: 46px;
   margin-top:10px;
   border-radius: 5px;
   width:100%;
 `
 
-const CustomInput = styled.input`
+const CustomInput = styled.textarea`
   border: none;
   padding: 22px 12px 10px;
   line-height: 10px;
@@ -25,6 +24,7 @@ const CustomInput = styled.input`
   outline: none;
   box-sizing: border-box;
   width: 100%;
+  max-width: 100%;
   color: ${props => props.theme.primaryTextColor};
   border: 1px solid ${props => props.meta.error && props.meta.touched ? props.theme.errorBorder : props.theme.primaryBorder };
   background: ${props => props.theme.primaryBackground};
@@ -70,7 +70,7 @@ const ErrorBlock = styled.div`
   font-weight: 500;
 `
 
-const FormField:React.FC<FormFieldProps> = ({ label, ...props }) => {
+const FormTextArea:React.FC<FormFieldProps> = ({ label, ...props }) => {
   const [field, meta, helpers] = useField(props)
   const [moveTop, setMoveTop] = useState(false)
   return (
@@ -101,4 +101,4 @@ const FormField:React.FC<FormFieldProps> = ({ label, ...props }) => {
   )
 }
 
-export default FormField
+export default FormTextArea
