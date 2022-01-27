@@ -92,6 +92,17 @@ const CreatePost = () => {
                         }
                       }
                     })
+
+                    cache.modify({
+                      fields: {
+                        myPaginatedPosts(existingData) {
+                          return {
+                            ...existingData,
+                            posts: [createPost.post, ...existingData.posts.slice(0,9)]
+                          }
+                        }
+                      }
+                    })
                     
                   },
                 })
