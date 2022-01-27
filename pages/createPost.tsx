@@ -50,15 +50,20 @@ const FormContainer = styled.div`
 
 
 const CreatePost = () => {
-  const {data} = useMeQuery()
+  const {data,loading} = useMeQuery()
   const router = useRouter()
   const [createPost] = useCreatePostMutation()
 
+  console.log('before use effect')
   useEffect(() => {
-    if(!data?.Me){
+    console.log('inside use effect')
+    console.log(data)
+    if(!data?.Me && !loading){
       router.push('/')
     }
   },[])
+  console.log('after use effect')
+
 
   return(
     <>
