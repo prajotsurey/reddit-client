@@ -1,12 +1,12 @@
 import styled from 'styled-components'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import { useLogoutMutation } from '../generated/graphql'
-import { gql, useApolloClient } from '@apollo/client'
+import { useApolloClient } from '@apollo/client'
 import { setToken } from '../utils/token'
 
 
-const DropDownContainer = styled.div`
+const DropDownContainer = styled.div<{open: boolean}>`
   display: ${props => props.open ? 'block': 'none'};
   position:absolute;
   top:110%;

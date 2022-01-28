@@ -3,6 +3,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { ApolloProvider } from '@apollo/client'
 import client from '../utils/client'
 import Head from 'next/head'
+import { AppProps } from 'next/app'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -11,9 +12,9 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     height: 100%;
     width: 100%;
-    background: ${props => props.theme.mainBackground};
+    background: ${(props:any) => props.theme.mainBackground};
     font-family: 'IBM plex sans', sans-serif;
-    color:${props => props.theme.primaryTextColor};
+    color:${(props:any) => props.theme.primaryTextColor};
   }
   html{
     height: 100%;
@@ -111,11 +112,11 @@ const theme = {
 
 export const ThemeContext = createContext({
   darkMode: false,
-  toggleDarkMode: () => {},
+  toggleDarkMode: () => null,
 })
 
 
-const App = ({ Component, pageProps }) => {
+const App = ({ Component, pageProps }: AppProps) => {
   const [darkMode, setDarkMode] = useState(false)
 
   useEffect(() => {
@@ -125,6 +126,7 @@ const App = ({ Component, pageProps }) => {
   const toggleDarkMode = () => {
     window.localStorage.setItem('reddit-theme', `${!darkMode}`)
     setDarkMode(!darkMode)
+    return null
   }
 
   return (

@@ -29,7 +29,7 @@ const VoteIcon = styled.svg`
   stroke: ${props => props.theme.voteIconStroke};
   fill: none;
 `
-const VoteIconUp = styled(VoteIcon)`
+const VoteIconUp = styled(VoteIcon)<{voteStatus: number}>`
   
   fill:  ${props => props.voteStatus === 1 ? props.theme.voteIconFillUp : 'none'};
   stroke: ${props => props.voteStatus === 1 ? props.theme.voteIconStrokeHoverUp : props.theme.voteIconStroke};
@@ -39,7 +39,7 @@ const VoteIconUp = styled(VoteIcon)`
   }
 `
 
-const VoteIconDown = styled(VoteIcon)`
+const VoteIconDown = styled(VoteIcon)<{voteStatus: number}>`
 
   fill:  ${props => props.voteStatus === -1 ? props.theme.voteIconFillDown : 'none'};
   stroke: ${props => props.voteStatus === -1 ? props.theme.voteIconStrokeHoverDown : props.theme.voteIconStroke};
@@ -115,7 +115,8 @@ const VoteSection:React.FC<Props> = ({voteStatus, voteCount, id}) => {
   const handleUpClick = async() => {
     try{
       const response = await vote({variables: {id, value:1}, update: (cache) => updateCache(cache,+1) })
-    } catch (error) {
+      return response
+    } catch (error:any) {
       if(error.message === 'Error while voting post. Try logging in again.') {
         router.push('/login')
       }
@@ -126,7 +127,8 @@ const VoteSection:React.FC<Props> = ({voteStatus, voteCount, id}) => {
   const handleDownClick = async() => {
     try{
       const response = await vote({variables: {id, value:-1}, update: (cache) => updateCache(cache,-1) })
-    } catch (err) {
+      return response
+    } catch (error:any) {
       if(error.message === 'Error while voting post. Try logging in again.') {
         router.push('/login')
       }

@@ -4,10 +4,9 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { useLogoutMutation, useMeQuery } from '../generated/graphql'
 import { ThemeContext } from '../pages/_app'
-import { getToken, setToken } from '../utils/token'
-import UserMenu from './UserMenu'
+import { setToken } from '../utils/token'
 
-const SidebarContainer = styled.nav`
+const SidebarContainer = styled.nav<{ sideBarOpen: boolean}>`
   position: fixed;
   top: 0;
   left:0;

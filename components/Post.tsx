@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
-import { PaginatedPostsResponse } from '../generated/graphql'
 import VoteSection from './VoteSection'
 
 const PostContainer = styled.div`

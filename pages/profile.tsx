@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/Header'
-import NavBar from '../components/NavBar'
 import PostComponent from '../components/Post'
 import ProfileSection from '../components/ProfileSection'
 import { useMeQuery, useMyPaginatedPostsQuery } from '../generated/graphql'
@@ -55,41 +54,42 @@ const Profile = () => {
   if(error || postError){
     router.push('/')
   }
-
-  return(
-    <>
-      <Head>
-        <title>
-        reddit.com:Profile
-        </title>
-      </Head>
-      <Header/>
-      <Container>
-        <PostsSection>
-          <h1>Posts</h1>
-          {postData?.myPaginatedPosts.posts.map( (post) => (
-            <>
-              <PostComponent post={post}/>
-            </>
-          ))}
-          { postData?.myPaginatedPosts.hasMore
-            ?
-            <LoadMoreButton type="button" onClick={() => {
-              fetchMore({
-                variables:{
-                  cursor: postData?.myPaginatedPosts.posts.at(-1).createdAt //ts does not have support for array.prototype.at in es2021
-                }
-              })
-            }}>
-                Load more
-            </LoadMoreButton>
-            : <></>
-          }
-        </PostsSection>
-        <ProfileSection user={data?.Me} />
-      </Container>
-    </>
-  )
+  if(data?.Me){
+    return(
+      <>
+        <Head>
+          <title>
+          reddit.com:Profile
+          </title>
+        </Head>
+        <Header/>
+        <Container>
+          <PostsSection>
+            <h1>Posts</h1>
+            {postData?.myPaginatedPosts.posts.map( (post) => (
+              <>
+                <PostComponent post={post}/>
+              </>
+            ))}
+            { postData?.myPaginatedPosts.hasMore
+              ?
+              <LoadMoreButton type="button" onClick={() => {
+                fetchMore({
+                  variables:{
+                    cursor: postData?.myPaginatedPosts.posts[9].createdAt //ts does not have support for array.prototype.at in es2021
+                  }
+                })
+              }}>
+                  Load more
+              </LoadMoreButton>
+              : <></>
+            }
+          </PostsSection>
+          <ProfileSection user={data?.Me} />
+        </Container>
+      </>
+    )
+  }
 }
 
 

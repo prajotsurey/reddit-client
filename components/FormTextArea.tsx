@@ -1,4 +1,4 @@
-import { useField } from 'formik'
+import { FieldMetaProps, useField } from 'formik'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
@@ -16,7 +16,7 @@ const CustomInputBox = styled.div`
   width:100%;
 `
 
-const CustomInput = styled.textarea`
+const CustomInput = styled.textarea<{ meta: FieldMetaProps<any> }>`
   border: none;
   padding: 22px 12px 10px;
   line-height: 10px;
@@ -39,7 +39,7 @@ const CustomInput = styled.textarea`
   
 `
 
-const CustomLabel = styled.label`
+const CustomLabel = styled.label<{ meta: FieldMetaProps<any>, moveTop: boolean }>`
   display: block;
   position: absolute;
   top: 22px;
@@ -71,13 +71,13 @@ const ErrorBlock = styled.div`
 `
 
 const FormTextArea:React.FC<FormFieldProps> = ({ label, ...props }) => {
-  const [field, meta, helpers] = useField(props)
+  const [field, meta] = useField(props)
   const [moveTop, setMoveTop] = useState(false)
   return (
     <>
       <CustomInputBox>
         <CustomInput meta={meta} {...field} {...props} 
-          onLoad={(e) => {
+          onLoad={(e:any) => {
             if(e.target.value){
               setMoveTop(true)
             } else {

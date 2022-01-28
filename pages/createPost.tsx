@@ -1,4 +1,3 @@
-import { gql } from '@apollo/client'
 import { Form, Formik } from 'formik'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
@@ -80,14 +79,14 @@ const CreatePost = () => {
               try{
                 const response = await createPost({ 
                   variables: {title,content},
-                  update: (cache, {data: {createPost}}) => {
-                    console.log(createPost.post)
+                  update: (cache, {data}) => {
+                    console.log(data?.createPost.post)
                     cache.modify({
                       fields: {
                         paginatedPosts(existingData) {
                           return {
                             ...existingData,
-                            posts: [createPost.post, ...existingData.posts.slice(0,9)]
+                            posts: [data?.createPost.post, ...existingData.posts.slice(0,9)]
                           }
                         }
                       }
@@ -98,7 +97,7 @@ const CreatePost = () => {
                         myPaginatedPosts(existingData) {
                           return {
                             ...existingData,
-                            posts: [createPost.post, ...existingData.posts.slice(0,9)]
+                            posts: [data?.createPost.post, ...existingData.posts.slice(0,9)]
                           }
                         }
                       }

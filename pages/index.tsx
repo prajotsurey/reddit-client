@@ -1,10 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import NavBar from '../components/NavBar'
 import Post from '../components/Post'
-import { useLoginMutation, usePaginatedPostsQuery } from '../generated/graphql'
+import { usePaginatedPostsQuery } from '../generated/graphql'
 import Head from 'next/head'
-import SideBar from '../components/Sidebar'
 import Header from '../components/Header'
 
 const Container = styled.div`
@@ -71,7 +69,7 @@ const Home = () => {
             <LoadMoreButton type="button" onClick={() => {
               fetchMore({
                 variables:{
-                  cursor: data?.paginatedPosts.posts.at(-1).createdAt //ts does not have support for array.prototype.at in es2021
+                  cursor: data?.paginatedPosts.posts[9].createdAt //ts does not have support for array.prototype.at in es2021
                 }
               })
             }}>

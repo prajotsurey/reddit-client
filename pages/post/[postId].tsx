@@ -2,7 +2,6 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 import Header from '../../components/Header'
-import NavBar from '../../components/NavBar'
 import VoteSection from '../../components/VoteSection'
 import { usePostQuery } from '../../generated/graphql'
 

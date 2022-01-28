@@ -53,6 +53,7 @@ const tokenRefreshLink = new TokenRefreshLink({
     setToken(accessToken)
   },
   handleError: err => {
+    console.log(err.message)
     console.warn('You are not logged in')
   }
 })

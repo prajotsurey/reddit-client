@@ -6,8 +6,8 @@ interface props {
   user: {
     id: number,
     createdAt: string,
-    email: string
-  } | undefined
+    email: string,
+  }
 }
 
 
