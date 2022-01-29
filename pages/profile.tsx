@@ -66,11 +66,18 @@ const Profile = () => {
         <Container>
           <PostsSection>
             <h1>Posts</h1>
-            {postData?.myPaginatedPosts.posts.map( (post) => (
-              <>
-                <PostComponent post={post}/>
-              </>
-            ))}
+            {
+              postData?.myPaginatedPosts.posts
+                ?
+                <div>
+                You do not have any posts.
+                </div>
+                :
+                postData?.myPaginatedPosts.posts.map( (post) => (
+                  <>
+                    <PostComponent post={post}/>
+                  </>
+                ))}
             { postData?.myPaginatedPosts.hasMore
               ?
               <LoadMoreButton type="button" onClick={() => {
