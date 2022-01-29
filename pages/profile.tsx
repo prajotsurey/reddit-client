@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
@@ -39,6 +40,19 @@ const LoadMoreButton = styled.button`
   color: ${props => props.theme.primaryTextColor};
 `
 
+const StyledTextLink = styled.a`
+  color: ${props => props.theme.primaryAccentTextColor};
+  font-weight: 600;
+  &:hover {
+    color: ${props => props.theme.primaryAccentTextColorHover};
+  }
+
+  &:active {
+    color: ${props => props.theme.primaryAccentTextColorActive};
+  }
+
+`
+
 const Profile = () => {
   const {data,loading,error} = useMeQuery()
   const {data:postData,loading:postLoading,error:postError, fetchMore} = useMyPaginatedPostsQuery({errorPolicy: 'all'})
@@ -77,7 +91,12 @@ const Profile = () => {
                 ))
                 :
                 <div>
-                You do not have any posts.
+                You do not have any posts yet.{' '}
+                  <Link href={'/createPost'}>
+                    <StyledTextLink>
+                      Create a Post.
+                    </StyledTextLink>        
+                  </Link>
                 </div>
 
             }
