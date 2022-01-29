@@ -4,6 +4,7 @@ import Post from '../components/Post'
 import { usePaginatedPostsQuery } from '../generated/graphql'
 import Head from 'next/head'
 import Header from '../components/Header'
+import Link from 'next/link'
 
 const Container = styled.div`
   max-width: 600px;
@@ -44,6 +45,19 @@ const NoPostsNote = styled.div`
   place-items:center;
   font-size:1.2em;
 `
+
+const StyledTextLink = styled.a`
+  color: ${props => props.theme.primaryAccentTextColor};
+  font-weight: 600;
+  &:hover {
+    color: ${props => props.theme.primaryAccentTextColorHover};
+  }
+
+  &:active {
+    color: ${props => props.theme.primaryAccentTextColorActive};
+  }
+
+`
 const Home = () => {
 
   const {data, loading, fetchMore} = usePaginatedPostsQuery()
@@ -75,7 +89,14 @@ const Home = () => {
               ))
               :
               <NoPostsNote>
-                There are no posts here. Create one.
+                <span>
+                There are no posts here yet. {' '}
+                  <Link href={'/createPost'}>
+                    <StyledTextLink>
+                      Create a Post.
+                    </StyledTextLink>        
+                  </Link>
+                </span>
               </NoPostsNote>
 
           }
