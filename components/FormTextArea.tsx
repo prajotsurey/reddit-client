@@ -28,6 +28,7 @@ const CustomInput = styled.textarea<{ meta: FieldMetaProps<any> }>`
   color: ${props => props.theme.primaryTextColor};
   border: 1px solid ${props => props.meta.error && props.meta.touched ? props.theme.errorBorder : props.theme.primaryBorder };
   background: ${props => props.theme.primaryBackground};
+  font-family: 'IBM plex sans', sans-serif;
   &:focus {
     border: 1px solid ${props => props.theme.primaryBorderFocus};
   }
