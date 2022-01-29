@@ -43,6 +43,7 @@ const Profile = () => {
   const {data,loading,error} = useMeQuery()
   const {data:postData,loading:postLoading,error:postError, fetchMore} = useMyPaginatedPostsQuery({errorPolicy: 'all'})
   const router = useRouter()
+  console.log(postData?.myPaginatedPosts.posts)
   if(loading || postLoading) {
     return(
       <>
@@ -67,17 +68,19 @@ const Profile = () => {
           <PostsSection>
             <h1>Posts</h1>
             {
-              postData?.myPaginatedPosts.posts
+              postData?.myPaginatedPosts.posts[0]
                 ?
-                <div>
-                You do not have any posts.
-                </div>
-                :
                 postData?.myPaginatedPosts.posts.map( (post) => (
                   <>
                     <PostComponent post={post}/>
                   </>
-                ))}
+                ))
+                :
+                <div>
+                You do not have any posts.
+                </div>
+
+            }
             { postData?.myPaginatedPosts.hasMore
               ?
               <LoadMoreButton type="button" onClick={() => {

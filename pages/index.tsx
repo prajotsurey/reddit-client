@@ -36,6 +36,14 @@ const LoadMoreButton = styled.button`
     background:${props => props.theme.primaryAccentBackgroundActive};
   }
 `
+
+const NoPostsNote = styled.div`
+  width:100%;
+  height: calc(100vh - 70px - 15px);
+  display: grid;
+  place-items:center;
+  font-size:1.2em;
+`
 const Home = () => {
 
   const {data, loading, fetchMore} = usePaginatedPostsQuery()
@@ -58,11 +66,18 @@ const Home = () => {
       <Container>
         <main>
           {
-            data?.paginatedPosts.posts.map(post => {
-              return(
-                <Post key={post.id} post={post}/>
-              )
-            })
+            data?.paginatedPosts.posts[0]
+              ?
+              data?.paginatedPosts.posts.map( (post) => (
+                <>
+                  <Post post={post}/>
+                </>
+              ))
+              :
+              <NoPostsNote>
+                There are no posts here. Create one.
+              </NoPostsNote>
+
           }
           { data?.paginatedPosts.hasMore
             ?
