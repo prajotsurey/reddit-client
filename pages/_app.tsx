@@ -136,6 +136,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           <GlobalStyle />
           <Head>
             <link key="font" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+            <link key="icon" rel="icon" type="image/png" href="/EllieIcon.png" />
           </Head>
           <Component {...pageProps} />
         </ThemeProvider>
