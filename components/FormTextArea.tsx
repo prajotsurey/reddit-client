@@ -25,6 +25,7 @@ const CustomInput = styled.textarea<{ meta: FieldMetaProps<any> }>`
   box-sizing: border-box;
   width: 100%;
   max-width: 100%;
+  font-size: 14px;
   color: ${props => props.theme.primaryTextColor};
   border: 1px solid ${props => props.meta.error && props.meta.touched ? props.theme.errorBorder : props.theme.primaryBorder };
   background: ${props => props.theme.primaryBackground};
@@ -49,18 +50,18 @@ const CustomLabel = styled.label<{ meta: FieldMetaProps<any>, moveTop: boolean }
   color: ${props => props.meta.touched && props.meta.error ? props.theme.errorBorder : props.theme.dimColor};
   font-size: 10px;
   transition: all 0.2s ease-out;
-  transform: ${props => props.moveTop ? 'translate3d(-3px,-13px,0px) scale(0.9)' : ''};
+  transform: ${props => props.moveTop ? 'translate3d(-3px,-14px,0px) scale(0.9)' : ''};
 
   ${CustomInput}:hover + & {
-    transform: translate3d(-3px,-13px, 0px) scale(0.9)
+    transform: translate3d(-3px,-14px, 0px) scale(0.9)
   }
 
   ${CustomInput}:active + & {
-    transform: translate3d(-3px,-13px, 0px) scale(0.9)
+    transform: translate3d(-3px,-14px, 0px) scale(0.9)
   }
 
   ${CustomInput}:focus + & {
-    transform: translate3d(-3px,-13px, 0px) scale(0.9)
+    transform: translate3d(-3px,-14px, 0px) scale(0.9)
   }
   
 `
