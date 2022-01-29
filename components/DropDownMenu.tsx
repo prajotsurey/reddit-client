@@ -1,9 +1,5 @@
 import styled from 'styled-components'
 import React, { useState } from 'react'
-import Link from 'next/link'
-import { useLogoutMutation } from '../generated/graphql'
-import { useApolloClient } from '@apollo/client'
-import { setToken } from '../utils/token'
 
 
 const DropDownContainer = styled.div<{open: boolean}>`
@@ -24,36 +20,6 @@ const ListElement = styled.li`
 
 `
 
-const StyledInnerLink = styled.a`
-padding: 10px 10px;
-box-sizing:border-box;
-display:block;
-  width: 100%;
-  cursor: pointer;
-  text-decoration: none;
-  color: ${props => props.theme.primaryAccentTextColor};
-  border-radius: 5px;
-  &:hover {
-    background-color: ${props => props.theme.secondaryAccentBackground};
-    color: ${props => props.theme.secondaryAccentTextColor};
-  }
-`
-
-const StyledInnerButton = styled.a`
-padding: 10px 10px;
-box-sizing:border-box;
-display:block;
-  width: 100%;
-  cursor: pointer;
-  text-decoration: none;
-  color: ${props => props.theme.primaryAccentTextColor};
-  border-radius: 5px;
-  &:hover {
-    background-color: ${props => props.theme.secondaryAccentBackground};
-    color: ${props => props.theme.secondaryAccentTextColor};
-  }
-`
-
 const DropDownButton = styled.button`
   background: none;
   border: none;
@@ -72,12 +38,17 @@ const DropDownSvg = styled.svg`
 const ButtonContainer = styled.div`
   display: flex;
 `
-const UserMenu = () => {
+const MenuContainer = styled.div`
+  position: relative;
+`
+
+interface props {
+  children: React.ReactNode[]
+}
+const DropDownMenu:React.FC<props> = ({children}) => {
   const [open,setOpen] = useState(false)
-  const apolloClient = useApolloClient()
-  const [logout] = useLogoutMutation()
   return(
-    <div>
+    <MenuContainer>
       <ButtonContainer>
         <DropDownButton onClick={() => setOpen(!open)}>
           <DropDownSvg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,27 +60,24 @@ const UserMenu = () => {
       </ButtonContainer>  
       <DropDownContainer open={open}>
         <List>
-          <ListElement>
-            <Link href="/profile">
-              <StyledInnerLink>
-                Profile
-              </StyledInnerLink>
-            </Link>
-          </ListElement>
+          {
+            children.map(child => (
+              <>
+                <ListElement>
+                  {child}
+                </ListElement>
+              </>
+            ))
+          }
+          
           <ListElement >
-            <StyledInnerButton onClick={async () => {
-              await logout()
-              setToken('')
-              await apolloClient.resetStore()
-            }}>
-            Logout  
-            </StyledInnerButton>
+            
           </ListElement> 
         </List> 
       </DropDownContainer>
-    </div>
+    </MenuContainer>
 
   )
 }
 
-export default UserMenu
+export default DropDownMenu

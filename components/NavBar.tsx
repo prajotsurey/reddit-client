@@ -1,9 +1,11 @@
+import { useApolloClient } from '@apollo/client'
 import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
-import { useMeQuery } from '../generated/graphql'
+import { useLogoutMutation, useMeQuery } from '../generated/graphql'
+import { setToken } from '../utils/token'
+import DropDownMenu from './DropDownMenu'
 import SliderButton from './SliderButton'
-import UserMenu from './UserMenu'
 
 const NavBarContainer = styled.nav`
   position: fixed;
@@ -131,13 +133,46 @@ const RedditLogoText = styled.svg`
   
 `
 
+const StyledInnerLink = styled.a`
+padding: 10px 10px;
+box-sizing:border-box;
+display:block;
+  width: 100%;
+  cursor: pointer;
+  text-decoration: none;
+  color: ${props => props.theme.primaryAccentTextColor};
+  border-radius: 5px;
+  &:hover {
+    background-color: ${props => props.theme.secondaryAccentBackground};
+    color: ${props => props.theme.secondaryAccentTextColor};
+  }
+`
+
+const StyledInnerButton = styled.a`
+padding: 10px 10px;
+box-sizing:border-box;
+display:block;
+  width: 100%;
+  cursor: pointer;
+  text-decoration: none;
+  color: ${props => props.theme.primaryAccentTextColor};
+  border-radius: 5px;
+  &:hover {
+    background-color: ${props => props.theme.secondaryAccentBackground};
+    color: ${props => props.theme.secondaryAccentTextColor};
+  }
+`
+
+
 interface props {
   toggle: (arg:boolean) => void
 }
 const NavBar:React.FC<props> = ({toggle}) => {
 
   const { data } = useMeQuery()
-
+  const [logout] = useLogoutMutation()
+  const apolloClient = useApolloClient()
+  
   return(
     <NavBarContainer>
       <Link href="/">
@@ -182,7 +217,20 @@ const NavBar:React.FC<props> = ({toggle}) => {
               </CreatePostLink>
             </Link>
             {data.Me.email}
-            <UserMenu/>
+            <DropDownMenu>
+              <Link href="/profile">
+                <StyledInnerLink>
+                Profile
+                </StyledInnerLink>
+              </Link>
+              <StyledInnerButton onClick={async () => {
+                await logout()
+                setToken('')
+                await apolloClient.resetStore()
+              }}>
+            Logout  
+              </StyledInnerButton>
+            </DropDownMenu>
           </>
           :
           <ButtonsContainer>
