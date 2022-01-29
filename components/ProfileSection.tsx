@@ -99,7 +99,7 @@ const ProfileSection:React.FC<props> = ({ user }) => {
           </JoinSection>
         </Info>
         <>
-          <Link href={'/creatPost'}>
+          <Link href={'/createPost'}>
             <CreatePostLink>
             NEW POST
             </CreatePostLink>
