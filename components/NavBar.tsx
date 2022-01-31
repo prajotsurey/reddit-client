@@ -75,7 +75,7 @@ const NavBarRight = styled.div`
   flex-direction: row;
   align-items: center;
 
-  @media(max-width:480px){
+  @media(max-width:515px){
     display: none;
   }
 `
@@ -93,7 +93,7 @@ const SidebarToggle = styled.button`
   border: none;
   padding: 0px;
   height:20px;
-  @media(min-width: 481px){
+  @media(min-width: 515px){
     display:none;
   }
 `
