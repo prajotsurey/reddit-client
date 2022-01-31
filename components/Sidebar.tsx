@@ -1,5 +1,6 @@
 import { useApolloClient } from '@apollo/client'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 import { useLogoutMutation, useMeQuery } from '../generated/graphql'
@@ -144,6 +145,7 @@ const SideBar:React.FC<Props> = ({sideBarOpen, toggle}) => {
   const { data } = useMeQuery()
   const [logout] = useLogoutMutation()
   const apolloClient = useApolloClient()
+  const router = useRouter()
 
   return(
     <SidebarContainer sideBarOpen={sideBarOpen}>
@@ -205,6 +207,7 @@ const SideBar:React.FC<Props> = ({sideBarOpen, toggle}) => {
             <SideButton onClick={async () => {
               await logout()
               setToken('')
+              router.push('/')
               await apolloClient.resetStore()
             }} tabIndex={0}>
                 Logout

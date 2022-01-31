@@ -1,9 +1,10 @@
 import { useApolloClient } from '@apollo/client'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 import { useLogoutMutation, useMeQuery } from '../generated/graphql'
-import { setToken } from '../utils/token'
+import { getToken, setToken } from '../utils/token'
 import DropDownMenu from './DropDownMenu'
 import SliderButton from './SliderButton'
 
@@ -172,7 +173,8 @@ const NavBar:React.FC<props> = ({toggle}) => {
   const { data } = useMeQuery()
   const [logout] = useLogoutMutation()
   const apolloClient = useApolloClient()
-  
+  const router = useRouter()
+
   return(
     <NavBarContainer>
       <Link href="/">
@@ -226,6 +228,7 @@ const NavBar:React.FC<props> = ({toggle}) => {
               <StyledInnerButton onClick={async () => {
                 await logout()
                 setToken('')
+                router.push('/')
                 await apolloClient.resetStore()
               }}>
             Logout  
