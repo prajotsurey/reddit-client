@@ -13,7 +13,6 @@ const PostContainer = styled.div`
   display:flex;
   flex-direction:row;
   min-height: 100px;
-  overflow: scroll;
 
   &:hover {
     border-color: ${props => props.theme.primaryBorderHover};
