@@ -32,6 +32,8 @@ const PostCreator = styled.div`
 const StyledInnerLink = styled.a`
   cursor: pointer;
   text-decoration: none;
+  display:block;
+  width:100%;
 `
 
 const PostTitle = styled.div`
