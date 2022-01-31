@@ -1,8 +1,14 @@
-# reddit-client [WEBSITE](https://reddit-client-nu.vercel.app/)
+# Reddit clone frontend built using NextJS, Apollo-Graphql and styled-components. [WEBSITE](https://reddit-client-nu.vercel.app/)
 
-Frontend for a fullstack reddit clone. Deployed on vercel.
+This project is the frontend for a fullstack reddit clone. 
 
-Built using Typescript, Nextjs and apollo-graphql and styled-components. 
+## Overview
+This is a replica of the reddit user interface. I built this using NextJS. It uses Grahql for commuinicating with the server and Styled-components for styling. It also has a dark-mode toggle which uses the styled-components' Theme Provider. It is deployed on vercel.
+
+Building this project allowed me to learn Styled-components and it's theme provider along with practicing my CSS and React skills. I also got to use the React Context provider to implement to dark-mode toggling. 
+
+## Contents
+
 * [Installation](#user-content-installation)
 * [Usage](#user-content-usage)
 
