@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 import { useLogoutMutation, useMeQuery } from '../generated/graphql'
-import { getToken, setToken } from '../utils/token'
+import { setToken } from '../utils/token'
 import DropDownMenu from './DropDownMenu'
 import SliderButton from './SliderButton'
 
