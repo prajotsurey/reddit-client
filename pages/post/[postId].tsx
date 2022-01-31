@@ -9,7 +9,7 @@ import { useDeletePostMutation, useMeQuery, usePostQuery } from '../../generated
 const Container = styled.div`
   max-width: 600px;
   margin: 0rem auto;
-  padding-top: 70px;
+  padding: 70px 10px 15px 10px;
 `
 const PostContainer = styled.div`
   border: 1px solid ${props => props.theme.primaryBorder};
