@@ -21,6 +21,7 @@ const PostContainer = styled.div`
   display:flex;
   flex-direction:row;
   min-height: 100px;
+  overflow: scroll;
 `
 const PostData = styled.div`
   padding: 12px 8px;
