@@ -9,6 +9,7 @@ const DropDownContainer = styled.div<{open: boolean}>`
   width: 150px;
   background: ${props => props.theme.primaryBackground};
   border-radius:5px;
+  box-shadow: 0px 0px 7px grey;
 `
 const List = styled.ul`
   list-style: none;
