@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/Header'
+import Loading from '../components/Loading'
 import PostComponent from '../components/Post'
 import ProfileSection from '../components/ProfileSection'
 import { useMeQuery, useMyPaginatedPostsQuery } from '../generated/graphql'
@@ -59,9 +60,7 @@ const Profile = () => {
   const router = useRouter()
   if(loading || postLoading) {
     return(
-      <>
-        loading
-      </>
+      <Loading /> 
     )
   }
 
