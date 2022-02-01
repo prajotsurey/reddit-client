@@ -68,57 +68,58 @@ const Profile = () => {
     router.push('/')
   }
 
-  if(!data?.Me){
+  if(!data || !data.Me){
     router.push('/')
-  }
-  return(
-    <>
-      <Head>
-        <title>
+  } else {
+    return(
+      <>
+        <Head>
+          <title>
           reddit.com:Profile
-        </title>
-      </Head>
-      <Header/>
-      <Container>
-        <PostsSection>
-          <h1>Posts</h1>
-          {
-            postData?.myPaginatedPosts.posts[0]
-              ?
-              postData?.myPaginatedPosts.posts.map( (post) => (
-                <>
-                  <PostComponent post={post}/>
-                </>
-              ))
-              :
-              <div>
+          </title>
+        </Head>
+        <Header/>
+        <Container>
+          <PostsSection>
+            <h1>Posts</h1>
+            {
+              postData?.myPaginatedPosts.posts[0]
+                ?
+                postData?.myPaginatedPosts.posts.map( (post) => (
+                  <>
+                    <PostComponent post={post}/>
+                  </>
+                ))
+                :
+                <div>
                 You do not have any posts yet.{' '}
-                <Link href={'/createPost'}>
-                  <StyledTextLink>
+                  <Link href={'/createPost'}>
+                    <StyledTextLink>
                       Create a Post.
-                  </StyledTextLink>        
-                </Link>
-              </div>
+                    </StyledTextLink>        
+                  </Link>
+                </div>
 
-          }
-          { postData?.myPaginatedPosts.hasMore
-            ?
-            <LoadMoreButton type="button" onClick={() => {
-              fetchMore({
-                variables:{
-                  cursor: postData?.myPaginatedPosts.posts[9].createdAt //ts does not have support for array.prototype.at in es2021
-                }
-              })
-            }}>
+            }
+            { postData?.myPaginatedPosts.hasMore
+              ?
+              <LoadMoreButton type="button" onClick={() => {
+                fetchMore({
+                  variables:{
+                    cursor: postData?.myPaginatedPosts.posts[9].createdAt //ts does not have support for array.prototype.at in es2021
+                  }
+                })
+              }}>
                   Load more
-            </LoadMoreButton>
-            : <></>
-          }
-        </PostsSection>
-        <ProfileSection user={data?.Me} />
-      </Container>
-    </>
-  )
+              </LoadMoreButton>
+              : <></>
+            }
+          </PostsSection>
+          <ProfileSection user={data.Me} />
+        </Container>
+      </>
+    )
+  }
 }
 
 
