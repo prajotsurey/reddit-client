@@ -57,7 +57,6 @@ const CreatePost = () => {
 
   useEffect(():any => {
 
-    console.log('here')
     if(loading){
       return(<Loading />)
     }
@@ -86,7 +85,6 @@ const CreatePost = () => {
                 const response = await createPost({ 
                   variables: {title,content},
                   update: (cache, {data}) => {
-                    console.log(data?.createPost.post)
                     cache.modify({
                       fields: {
                         paginatedPosts(existingData) {

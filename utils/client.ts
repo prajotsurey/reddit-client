@@ -5,7 +5,6 @@ import { getToken, setToken } from './token'
 import { TokenRefreshLink } from 'apollo-link-token-refresh'
 import jwtDecode from 'jwt-decode'
 
-console.log(process.env.NEXT_PUBLIC_SERVER_URL)
 const httpLink = createHttpLink({
   uri: process.env.NEXT_PUBLIC_SERVER_URL,
   credentials: 'include'
@@ -54,7 +53,6 @@ const tokenRefreshLink = new TokenRefreshLink({
     setToken(accessToken)
   },
   handleError: err => {
-    console.log(err.message)
     console.warn('You are not logged in')
   }
 })

@@ -77,7 +77,6 @@ const Login = () => {
   const router = useRouter()
   const { data } = useMeQuery()
   const apolloClient = useApolloClient()
-  console.log(data)
 
   if(data?.Me) {
     router.push('/')   

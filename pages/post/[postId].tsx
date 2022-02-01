@@ -106,7 +106,6 @@ const PostDetail = () => {
                   <PostMenu >
                     <StyledInnerButton onClick={async () => {
                       await deletePost({variables: {id:data.post.id}})
-                      console.log('post deleted')
                       router.push('/')
                     }}>
                       Delete Post

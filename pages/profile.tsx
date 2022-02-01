@@ -61,7 +61,6 @@ const Profile = () => {
 
   useEffect(():any => {
 
-    console.log('here')
     if(loading || postLoading){
       return(<Loading />)
     }

@@ -109,7 +109,6 @@ const VoteSection:React.FC<Props> = ({voteStatus, voteCount, id}) => {
     }
 
 
-    console.log(post)
   }
 
   const handleUpClick = async() => {
