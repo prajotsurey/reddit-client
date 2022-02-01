@@ -37,7 +37,7 @@ const StyledInnerLink = styled.a`
 `
 
 const PostTitle = styled.div`
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 500;
 `
 
