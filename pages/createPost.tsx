@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import FormField from '../components/FormField'
 import FormTextArea from '../components/FormTextArea'
 import Header from '../components/Header'
+import Loading from '../components/Loading'
 import { useCreatePostMutation, useMeQuery } from '../generated/graphql'
 import mapToFormikErrors from '../utils/mapToFormikErrors'
 
@@ -54,16 +55,15 @@ const CreatePost = () => {
   const router = useRouter()
   const [createPost] = useCreatePostMutation()
 
-  console.log('before use effect')
-  useEffect(() => {
-    console.log('inside use effect')
-    console.log(data)
-    if(!data?.Me && !loading){
-      router.push('/')
-    }
-  },[])
-  console.log('after use effect')
+  if((!data?.Me && !loading)){
+    router.push('/')
+  }
 
+  if(loading){
+    return(
+      <Loading />
+    )
+  }
 
   return(
     <>

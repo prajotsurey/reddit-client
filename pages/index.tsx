@@ -5,6 +5,7 @@ import { usePaginatedPostsQuery } from '../generated/graphql'
 import Head from 'next/head'
 import Header from '../components/Header'
 import Link from 'next/link'
+import Loading from '../components/Loading'
 
 const Container = styled.div`
   max-width: 600px;
@@ -63,9 +64,7 @@ const Home = () => {
   const {data, loading, fetchMore} = usePaginatedPostsQuery()
   if(loading) {
     return(
-      <Container>
-        Loading...
-      </Container>
+      <Loading />
     )
   }
 
