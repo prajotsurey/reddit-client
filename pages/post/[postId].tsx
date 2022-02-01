@@ -23,7 +23,7 @@ const PostContainer = styled.div`
   min-height: 100px;
 `
 const PostData = styled.div`
-  padding: 12px 8px;
+  padding: 8px 8px;
   flex:1
 `
 const PostTop = styled.div`
@@ -40,12 +40,13 @@ const PostCreator = styled.div`
 `
 
 const PostTitle = styled.div`
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 500;
 `
 
 const PostContent = styled.div`
-  margin-top: 2rem;
+  margin-top: 1.1rem;
+  margin-bottom: 1rem;
 `
 const StyledInnerButton = styled.a`
 padding: 10px 10px;

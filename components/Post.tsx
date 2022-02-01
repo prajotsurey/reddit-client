@@ -33,7 +33,8 @@ const StyledInnerLink = styled.a`
   cursor: pointer;
   text-decoration: none;
   display:block;
-  width:100%;
+  display: flex;
+  flex-grow: 1;
 `
 
 const PostTitle = styled.div`
