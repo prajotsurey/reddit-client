@@ -24,7 +24,7 @@ const PostContainer = styled.div`
 `
 const PostData = styled.div`
   padding: 8px 8px;
-  flex:1
+  flex:1;
 `
 const PostTop = styled.div`
   margin-bottom: 10px;

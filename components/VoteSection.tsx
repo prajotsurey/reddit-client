@@ -12,6 +12,7 @@ const VoteSectionContainer = styled.div`
   flex-direction: column;
   align-items:center;
   padding-top: 10px;
+  flex-shrink: 0;
 `
 const VoteButton = styled.button`
   border: none;
