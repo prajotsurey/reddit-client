@@ -16,10 +16,10 @@ const CustomInputBox = styled.div`
   width:100%;
 `
 
-const CustomInput = styled.textarea<{ meta: FieldMetaProps<any> }>`
+const CustomInput = styled.textarea<{ rows: any,meta: FieldMetaProps<any> }>`
   border: none;
   padding: 22px 12px 10px;
-  line-height: 10px;
+  line-height: 20px;
   border-radius: 5px;
   outline: none;
   box-sizing: border-box;
@@ -78,7 +78,7 @@ const FormTextArea:React.FC<FormFieldProps> = ({ label, ...props }) => {
   return (
     <>
       <CustomInputBox>
-        <CustomInput meta={meta} {...field} {...props} 
+        <CustomInput rows="10" meta={meta} {...field} {...props} 
           onLoad={(e:any) => {
             if(e.target.value){
               setMoveTop(true)
