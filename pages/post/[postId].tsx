@@ -47,6 +47,12 @@ const PostTitle = styled.div`
 const PostContent = styled.div`
   margin-top: 1.1rem;
   margin-bottom: 1rem;
+  white-space: -moz-pre-wrap !important;
+  white-space: -webkit-pre-wrap;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: normal;
 `
 const StyledInnerButton = styled.a`
 padding: 10px 10px;
