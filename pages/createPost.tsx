@@ -55,16 +55,22 @@ const CreatePost = () => {
   const router = useRouter()
   const [createPost] = useCreatePostMutation()
 
-  if((!data?.Me && !loading)){
-    router.push('/')
-  }
+  useEffect(():any => {
+
+    console.log('here')
+    if(loading){
+      return(<Loading />)
+    }
+
+    if(!data?.Me && !loading){
+      router.push('/login')
+    }
+  },[data,loading])
+
 
   if(loading){
-    return(
-      <Loading />
-    )
+    return(<Loading />)
   }
-
   return(
     <>
       <Header />
