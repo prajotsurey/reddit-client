@@ -7,7 +7,7 @@ interface props {
     id: number,
     createdAt: string,
     email: string,
-  }
+  } | undefined | null
 }
 
 

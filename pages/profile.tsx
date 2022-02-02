@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { ReactNode, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Header from '../components/Header'
 import Loading from '../components/Loading'
@@ -55,8 +55,8 @@ const StyledTextLink = styled.a`
 `
 
 const Profile = () => {
-  const {data,loading,error} = useMeQuery()
-  const {data:postData,loading:postLoading,error:postError, fetchMore} = useMyPaginatedPostsQuery({errorPolicy: 'all'})
+  const {data,loading} = useMeQuery()
+  const {data:postData,loading:postLoading, fetchMore} = useMyPaginatedPostsQuery({errorPolicy: 'all'})
   const router = useRouter()
 
   useEffect(():any => {
@@ -73,6 +73,10 @@ const Profile = () => {
 
   if(loading || postLoading){
     return(<Loading />)
+  }
+
+  if(!data?.Me && !loading){
+    router.push('/login')
   }
   return(
     <>
@@ -118,7 +122,7 @@ const Profile = () => {
             : <></>
           }
         </PostsSection>
-        <ProfileSection user={data.Me} />
+        <ProfileSection user={data?.Me} />
       </Container>
     </>
   )
