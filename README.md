@@ -1,4 +1,4 @@
-# Reddit clone frontend built using NextJS, Apollo-Graphql and styled-components. [WEBSITE](https://reddit-client-nu.vercel.app/)
+# Reddit clone frontend built using NextJS, Apollo-Graphql and styled-components. [WEBSITE](https://reddit-client-murex.vercel.app/)
 
 This project is the frontend for a fullstack reddit clone. 
 
