@@ -11,6 +11,8 @@ Building this project allowed me to learn Styled-components and it's theme provi
 
 * [Installation](#user-content-installation)
 * [Usage](#user-content-usage)
+* [Styled Components Tips](#user-styled-component-tips)
+
 
 ## Installation
 
@@ -38,3 +40,11 @@ NEXT_PUBLIC_TOKEN_REFRESH_LINK=<backend url>/refresh_token
 ```bash
 npm run dev
 ```
+
+## Styled Component Tips
+
+Styled Components required the "\_app.js", "\_document.js" and ".babelrc" files along with the "babel-plugin-styled-components" dependency.
+This project has all these things and is properly configured so no additional steps are needed.
+
+To start a new project with styled-components clone the styled-components example from the nexjs [examples section](https://nextjs.org/examples).
+To add styled componenets to a preexisting project check the style-components examples from the above link and make sure all the boilerplate files and packages are present in your project. Make sure to check the project's package.json to view dependencies.
